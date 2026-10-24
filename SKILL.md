@@ -15,11 +15,19 @@ These rules apply to every language and project; examples in parentheses are for
 - Group related data into classes or structs instead of scattering it.
 - Break long functions into small functions that do exactly one thing.
 - Replace magic numbers, strings and paths with named constants or a central configuration.
+- Run the fast automated tests after every step; run one full end-to-end test (install, upgrade, main user flows) before each release and again after security fixes, not after every step.
+- Tests never contact real external services: mock them and block all other outbound hosts.
 
 ## Refactoring and modernization
 - Look for outdated patterns, libraries or language constructs that have better, established alternatives today, and propose them with reasons.
 - Size limits (tell the user these): split files from about 400 lines (excluding tests, translations, migrations) by topic; split functions from about 40 lines or when they do more than one thing. Smaller units are easier to maintain for humans and AI.
 - Before a larger restructuring, state the plan briefly and wait for approval.
+
+## Releases and updates
+- Keep one source of truth for the version number and add a test that all copies (headers, constants, readme) match.
+- Never overwrite a released build: build scripts refuse to overwrite an existing version; test builds go to a separate output folder.
+- Run data migrations by comparing a stored schema version on every load, not only on install/activation, and back up the affected data first.
+- Validate uploaded packages and archives before use: expected root folder, no path traversal (`../`, absolute paths), no symlinks, limits on size and entry count (zip bombs).
 
 ## Readability and robustness
 - Use descriptive names and follow the language's style guide (e.g. PEP 8, the project's linter/formatter), so code reads without extra comments.
@@ -35,6 +43,11 @@ These rules apply to every language and project; examples in parentheses are for
 - Prevent XSS: context-appropriate output encoding (e.g. `<` becomes `&lt;`), no `innerHTML` with untrusted data, links only with allowed schemes.
 - Prevent path traversal and unsafe deserialization with safe standard libraries, not home-grown solutions.
 - No secrets in code or the repository; use environment variables or a secure store.
+- Never print secrets (passwords, tokens, keys) in logs, debug output or test output.
+- Check uploaded files completely on the server (content/magic bytes, embedded macros, archive contents) before storing or forwarding them; never rely on client-side checks or direct client-to-storage uploads that bypass the server.
+- Strip CR/LF from everything placed in mail headers (subject, names, addresses) to prevent header injection.
+- Keep temporary files with sensitive content under random names in a non-public location, delete them after use, and remove orphans on a schedule.
+- Never invent URLs, endpoints or hostnames in code, docs or configuration; use only verified ones, otherwise leave the value empty.
 - Store passwords only salted and hashed with strong algorithms (Argon2id, bcrypt); encrypt data in transit end to end (TLS); compare secrets in constant time.
 - Memory safety: in C/C++ avoid unsafe functions (e.g. `strcpy`, `gets`); prefer memory-safe languages (e.g. Rust) where possible.
 - Check dependencies for known vulnerabilities (e.g. `npm audit`, `pip-audit`), update outdated versions and tell the user what changed; add new dependencies only with a reason.
