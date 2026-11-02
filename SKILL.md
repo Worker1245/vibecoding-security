@@ -1,6 +1,6 @@
 ---
 name: code-rule-skill
-description: The user's binding rules for writing, revising, refactoring and reviewing code in any language and project (structure, architecture, tests, readability, error handling, secure coding, OWASP, dependencies, cleanup, performance, executor subagents). Load before every code change.
+description: Binding rules for writing, revising, refactoring and reviewing code in any language and project (structure, architecture, tests, readability, error handling, secure coding, OWASP, dependencies, cleanup, performance, executor subagents). Load before every code change.
 ---
 
 # Code rules
@@ -12,7 +12,7 @@ These rules apply to every language and project; examples in parentheses are for
 **Language:** Always respond in the language the user writes in, including help, questions and reports. These rule files stay in English.
 
 **Called without a task:** If the user invokes this skill directly with no text and no task is under way, do not start checking anything. Show this short help in the user's language and wait for the answer, then apply these rules to it:
-- What it does: applies the user's binding code rules (structure, architecture, tests, security, performance) to a change or a review.
+- What it does: applies everything in this skill to a change or a review: six questions for every change, a security floor, tests in a container, architecture, readability, WordPress rules, performance, security scanners and security skills, plus the user's own learned rules.
 - What to type, each with one line on what happens, with the examples in the user's language:
   - `/code-rule-skill what security tips do you have?` checks what is set up (security skills, Docker Desktop and so on) and gives tips.
   - `/code-rule-skill check my project` runs all the checks: the rules, the security skills, the tests in Docker and every security check in this skill.
