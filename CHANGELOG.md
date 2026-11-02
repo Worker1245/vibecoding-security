@@ -10,3 +10,4 @@
 2026-11-02: rules added: task cards for agents, git from the start, mock-ups built from product code, one check command
 2026-11-02: restructured into a short SKILL.md and references/ loaded on condition; duplicates merged; executor subagent check added as question 6; description shortened
 2026-11-02: review interval changed from 90 days to once a month
+2026-11-02: short help when called without a task; responses in the user's language; load conditions name observable triggers; loaded files are named in one line
