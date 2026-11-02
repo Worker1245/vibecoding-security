@@ -31,4 +31,5 @@ Skip a step only if its program or skill is missing, it does not apply (no depen
 - A table of all checks: ran, skipped or failed, with the reason and the result.
 - Findings by severity, with file and line, as confirmed, `needs_validation` or rejected.
 - Never call a check passed if it did not run. No findings means none were found by the checks that ran, not that the project is secure.
+- Record the measured numbers as described in `learning.md` and report the change since the last check.
 - End with what is still missing and numbered questions on what to fix.

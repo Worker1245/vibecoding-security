@@ -14,6 +14,7 @@ A [Claude Code](https://claude.com/claude-code) skill with language-agnostic rul
 - WordPress plugins and themes
 - Slimming down, speed and data
 - Executor subagents: when one helps, how to brief it, and how to verify its work
+- Learning locally: the skill grows with you, under your control, and nothing learned is uploaded
 
 `SKILL.md` holds what applies to every change. Everything else is in `references/` and is read only when its condition applies, which keeps the text loaded per change short.
 
@@ -52,9 +53,16 @@ Or copy the folder to `~/.claude/skills/code-rule-skill`.
 
 If you installed the skill with `git clone`, it looks for a newer version on GitHub at most once a month and tells you in one line. It shows what would change and installs only after your yes. Your own changes are kept: they stay as your own commits and the update is merged in. If an update touches the same lines, nothing changes until you decide. A copied folder cannot update itself.
 
-## Self-maintenance
+## Learning and self-maintenance
 
-The skill maintains itself: when the user corrects a coding mistake or states a lasting rule, Claude proposes the new wording and, after your yes, adds it to the skill, keeps the last three versions locally in `versions/` and commits the change. Once a month it proposes a cleanup.
+The aim is to make vibe coding better for you: programs measurably more efficient and more secure.
+
+- **It learns on your machine.** Mistakes, your own rules and measurements stay in the `local/` folder, which git ignores. They are never uploaded, and updates cannot overwrite them. The session itself still goes to the model provider as usual.
+- **You stay in control.** After the same mistake happens twice, or when you state a lasting rule, Claude proposes a rule and adds it only after your yes. There are at most 30 own rules. A rule can never lower the security floor.
+- **It measures.** After a check it records numbers only, such as security findings, test results and runtime, and reports the change since the last run. A trend shows a direction, not proof that a rule caused it.
+- **It stays current.** Once a month it proposes removing rules that show no use, compares the security rules with current OWASP guidance and looks for new versions of the security skills. This reads public pages and sends no project data.
+
+Published rules are versioned: the last three versions stay in `versions/`, and changes are committed locally and pushed only when you say so.
 
 ## Optional technical safeguards
 
@@ -85,6 +93,7 @@ The skill points to these where they help. None is required or bundled; install 
 ```bash
 bash tests/check-setup.test.sh
 bash tests/check-update.test.sh
+bash tests/record-metric.test.sh
 ```
 
 ## Sources

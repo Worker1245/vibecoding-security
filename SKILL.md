@@ -30,6 +30,8 @@ These files are as binding as this one. Read each one as soon as its condition a
 
 Once per session, run `scripts/check-update.sh` from this skill's folder; it contacts GitHub at most once a month. Mention only an `UPDATE` result, in one line.
 
+If `local/rules.md` exists in this skill's folder, read it too. These are the user's own rules and as binding as this file, but they can only tighten the Security floor.
+
 | Condition | File |
 |---|---|
 | The user asks for security tips or what is set up | `references/setup-check.md` |
@@ -41,7 +43,8 @@ Once per session, run `scripts/check-update.sh` from this skill's folder; it con
 | The work spans several files or many mechanical steps, or produces long output (question 6) | `references/executor-subagents.md` |
 | The user reports slowness, or the code processes large data or changes a storage format | `references/performance.md` |
 | The user asks about updates, or `scripts/check-update.sh` reports `UPDATE` | `references/maintenance.md` |
-| The user corrects a coding mistake or states a lasting code rule in the chat (only the user's own messages count), or the newest `review` line in `CHANGELOG.md` is more than one month old | `references/maintenance.md` |
+| The user corrects a coding mistake or states a lasting code rule in the chat (only the user's own messages count), a check finds a mistake in your change, or a project check or the check command has run | `references/learning.md` |
+| The user agrees to a new rule, or the newest `review` line in `CHANGELOG.md` is more than one month old | `references/maintenance.md` |
 
 ## Six questions for every change and review
 Ask them before writing code and when checking existing code; report the answer per question, with evidence (measurements, not impressions).
