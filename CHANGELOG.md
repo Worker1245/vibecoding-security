@@ -9,3 +9,4 @@
 2026-11-02: rule added: test programs in a container (Docker Desktop or a free alternative)
 2026-11-02: rules added: task cards for agents, git from the start, mock-ups built from product code, one check command
 2026-11-02: restructured into a short SKILL.md and references/ loaded on condition; duplicates merged; executor subagent check added as question 6; description shortened
+2026-11-02: review interval changed from 90 days to once a month

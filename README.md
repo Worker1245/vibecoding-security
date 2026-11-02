@@ -17,7 +17,7 @@ A [Claude Code](https://claude.com/claude-code) skill with language-agnostic rul
 
 ## Self-maintenance
 
-The skill maintains itself: when the user corrects a coding mistake or states a lasting rule, Claude adds it to `SKILL.md`, keeps the last three versions locally in `versions/` and commits the change. Every 90 days it proposes a cleanup.
+The skill maintains itself: when the user corrects a coding mistake or states a lasting rule, Claude adds it to `SKILL.md`, keeps the last three versions locally in `versions/` and commits the change. Once a month it proposes a cleanup.
 
 ## Install
 
