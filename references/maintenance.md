@@ -12,6 +12,6 @@ Keep this skill current without asking first; report afterwards.
 - Then tell the user in one or two sentences what was added or replaced, and that the previous version is in `versions/` (or `git revert`).
 - Leave the frontmatter (`name`, `description`) unchanged unless the user asks.
 
-## Quarterly review
-- When this skill is loaded and the newest `review` line in `CHANGELOG.md` is more than 90 days old, before starting the code task check the rules for duplicates, contradictions and outdated advice, and propose concrete cuts or merges to the user.
+## Monthly review
+- When this skill is loaded and the newest `review` line in `CHANGELOG.md` is more than one month old, before starting the code task check the rules for duplicates, contradictions and outdated advice, and propose concrete cuts or merges to the user.
 - Apply them only after the user agrees (self-update steps above apply), then append `YYYY-MM-DD: review – <result>` to `CHANGELOG.md`.

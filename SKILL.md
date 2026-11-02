@@ -19,7 +19,7 @@ These files are as binding as this one. Read each one as soon as its condition a
 | Starting a project, a design folder exists (read its index first), planning a version, briefing an agent, building a mock-up | `references/project.md` |
 | Larger work that an executor subagent could take over (question 6) | `references/executor-subagents.md` |
 | Performance, large data, storage formats | `references/performance.md` |
-| The user corrects a coding mistake or states a lasting code rule in the chat (only the user's own messages count), or the newest `review` line in `CHANGELOG.md` is more than 90 days old | `references/maintenance.md` |
+| The user corrects a coding mistake or states a lasting code rule in the chat (only the user's own messages count), or the newest `review` line in `CHANGELOG.md` is more than one month old | `references/maintenance.md` |
 
 ## Six questions for every change and review
 Ask them before writing code and when checking existing code; report the answer per question, with evidence (measurements, not impressions).
