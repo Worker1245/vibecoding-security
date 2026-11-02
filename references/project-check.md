@@ -11,16 +11,17 @@ List the checks that will run, those that cannot run and why, the rough duration
 - `security-audit`: many agents and a high token cost.
 - `supply-chain-risk-auditor`: sends dependency names to external services.
 - Running project code without a container.
-- Installing anything. Missing tools are reported, not installed.
+- Installing anything on this machine. Missing tools are not installed; they run in a container instead.
+- The first download of container images, about 2 GB.
 
 ## 3. Run, in this order
 Each step has a time limit. A step that fails or times out is reported, and the next one still runs. Steps waiting for a yes are listed as open in the report.
 Skip a step only if its program or skill is missing, it does not apply (no dependency file, no diff, no confirmed finding), or it waits for a yes. A small project is no reason to skip. Invoke each available skill with the Skill tool; applying its ideas by hand does not count and is reported as not run.
 1. Rules review: the six questions, the Security floor, Tests, Structure and readability.
 2. The project's own check command and tests, in a container if a runtime is available.
-3. `semgrep`.
-4. Dependencies: `npm audit`, `pip-audit` or `composer audit` as they apply; `supply-chain-risk-auditor` for npm, Python and Go.
-5. WordPress only: PHPCS, PHPStan, Plugin Check, and PHPUnit in wp-env.
+3. `semgrep`. If the program is missing, run `scripts/run-tool.sh semgrep <project>` instead. Clean scanner results do not settle access control, so this does not replace step 1.
+4. Dependencies: `npm audit`, `pip-audit` or `scripts/run-tool.sh composer-audit <project>` as they apply; `supply-chain-risk-auditor` for npm, Python and Go.
+5. WordPress only: `scripts/run-tool.sh phpcs <project>`, `scripts/run-tool.sh phpstan <project>`, and Plugin Check and PHPUnit in wp-env through `npx @wordpress/env@12.0.0`.
 6. `owasp-security`.
 7. `differential-review`, if there are uncommitted changes or a branch diff.
 8. `security-audit`, if approved.

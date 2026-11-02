@@ -49,6 +49,14 @@ ln -s "$PWD/code-rule-skill" ~/.claude/skills/code-rule-skill
 
 Or copy the folder to `~/.claude/skills/code-rule-skill`.
 
+## Checking tools in containers
+
+Semgrep, PHPCS with the WordPress standard, PHPStan and Composer audit need no installation. With Docker Desktop or an alternative running, `scripts/run-tool.sh <tool> <project>` starts them in a container:
+
+- The project is mounted read-only, so the tools cannot change it.
+- PHPCS and PHPStan run without network access. Semgrep fetches its rules with metrics turned off, and Composer audit asks Packagist about package names. Neither sends your code.
+- The first run downloads about 2 GB of images.
+
 ## Updates
 
 If you installed the skill with `git clone`, it looks for a newer version on GitHub at most once a month and tells you in one line. It shows what would change and installs only after your yes. Your own changes are kept: they stay as your own commits and the update is merged in. If an update touches the same lines, nothing changes until you decide. A copied folder cannot update itself.
@@ -58,7 +66,7 @@ If you installed the skill with `git clone`, it looks for a newer version on Git
 The aim is to make vibe coding better for you: programs measurably more efficient and more secure.
 
 - **It learns on your machine.** Mistakes, your own rules and measurements stay in the `local/` folder, which git ignores. They are never uploaded, and updates cannot overwrite them. The session itself still goes to the model provider as usual.
-- **You stay in control.** After the same mistake happens twice, or when you state a lasting rule, Claude proposes a rule and adds it only after your yes. There are at most 30 own rules. A rule can never lower the security floor.
+- **You stay in control.** After the same mistake happens twice, or when you state a lasting rule, Claude proposes a rule and adds it only after your yes. There are at most 100 own rules. A rule can never lower the security floor.
 - **It measures.** After a check it records numbers only, such as security findings, test results and runtime, and reports the change since the last run. A trend shows a direction, not proof that a rule caused it.
 - **It stays current.** Once a month it proposes removing rules that show no use, compares the security rules with current OWASP guidance and looks for new versions of the security skills. This reads public pages and sends no project data.
 
@@ -94,6 +102,7 @@ The skill points to these where they help. None is required or bundled; install 
 bash tests/check-setup.test.sh
 bash tests/check-update.test.sh
 bash tests/record-metric.test.sh
+bash tests/run-tool.test.sh
 ```
 
 ## Sources
