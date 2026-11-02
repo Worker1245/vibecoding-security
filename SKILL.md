@@ -1,5 +1,5 @@
 ---
-name: vibecode-help
+name: vibecoding-security
 description: Binding rules for writing, revising, refactoring and reviewing code in any language and project (structure, architecture, tests, readability, error handling, secure coding, OWASP, dependencies, cleanup, performance, executor subagents). Load before every code change.
 ---
 
@@ -11,15 +11,15 @@ These rules apply to every language and project and to any coding agent that can
 
 **Language:** Always respond in the language the user writes in, including help, questions and reports. These rule files stay in English.
 
-**Where this runs:** Commands below use `/vibecode-help`; use your tool's own way of calling a skill. Where the environment cannot run the scripts or keep the `local/` folder (e.g. a hosted agent), apply the rules as text, and say which steps cannot run and that nothing is stored on the user's machine.
+**Where this runs:** Commands below use `/vibecoding-security`; use your tool's own way of calling a skill. Where the environment cannot run the scripts or keep the `local/` folder (e.g. a hosted agent), apply the rules as text, and say which steps cannot run and that nothing is stored on the user's machine.
 
 **Called without a task:** If the user invokes this skill directly with no text and no task is under way, do not start checking anything. Show this short help in the user's language and wait for the answer, then apply these rules to it:
 - What it does: applies everything in this skill to a change or a review: six questions for every change, a security floor, tests in a container, architecture, readability, WordPress rules, performance, security scanners and security skills, plus the user's own learned rules.
 - What to type, each with one line on what happens, with the examples in the user's language:
-  - `/vibecode-help what security tips do you have?` checks what is set up (security skills, Docker Desktop and so on) and gives tips.
-  - `/vibecode-help check my project` runs all the checks: the rules, the security skills, the tests in Docker and every security check in this skill.
-  - `/vibecode-help` followed by your own prompt: the agent first sharpens the prompt with you through questions, then does the work under these rules once you are satisfied. Add "directly" to skip the questions.
-  - `/vibecode-help is there an update?` looks for a newer version on GitHub and installs it only if the user agrees, keeping the user's own changes.
+  - `/vibecoding-security what security tips do you have?` checks what is set up (security skills, Docker Desktop and so on) and gives tips.
+  - `/vibecoding-security check my project` runs all the checks: the rules, the security skills, the tests in Docker and every security check in this skill.
+  - `/vibecoding-security` followed by your own prompt: the agent first sharpens the prompt with you through questions, then does the work under these rules once you are satisfied. Add "directly" to skip the questions.
+  - `/vibecoding-security is there an update?` looks for a newer version on GitHub and installs it only if the user agrees, keeping the user's own changes.
 - End by asking what to work on. If the agent loads this skill on its own before a code change, skip the help and continue with the task.
 
 ## Working with the user
