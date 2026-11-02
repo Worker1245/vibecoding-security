@@ -17,7 +17,12 @@ A [Claude Code](https://claude.com/claude-code) skill with language-agnostic rul
 
 ## Usage
 
-Claude loads the skill before code changes. Called as `/code-rule-skill` without text, it shows a short help and then works on what you name. It answers in the language you write in.
+Claude loads the skill on its own before code changes. You can also call it yourself:
+
+- **Only the skill name, nothing else:** If you type just `/code-rule-skill` in the chat and no task is under way, nothing gets checked or changed yet. You get a short help that says what the skill does and how to use it, and Claude asks what to work on. Your answer starts the work.
+- **With a task, file or folder:** `/code-rule-skill add a contact form` or `/code-rule-skill review src/` starts right away.
+
+The skill answers in the language you write in.
 
 ## Self-maintenance
 
