@@ -16,7 +16,7 @@ These rules apply to every language and project; examples in parentheses are for
 - What to type, each with one line on what happens, with the examples in the user's language:
   - `/code-rule-skill what security tips do you have?` checks what is set up (security skills, Docker Desktop and so on) and gives tips.
   - `/code-rule-skill check my project` runs all the checks: the rules, the security skills, the tests in Docker and every security check in this skill.
-  - `/code-rule-skill add a contact form` does the work under these rules.
+  - `/code-rule-skill` followed by your own prompt: Claude first sharpens the prompt with you through questions, then does the work under these rules once you are satisfied. Add "directly" to skip the questions.
   - `/code-rule-skill is there an update?` looks for a newer version on GitHub and installs it only if the user agrees, keeping the user's own changes.
 - End by asking what to work on. If Claude loads this skill on its own before a code change, skip the help and continue with the task.
 
@@ -34,6 +34,7 @@ If `local/rules.md` exists in this skill's folder, read it too. These are the us
 
 | Condition | File |
 |---|---|
+| The user invokes this skill directly with their own prompt for a task | `references/prompt-creator.md` |
 | The user asks for security tips or what is set up | `references/setup-check.md` |
 | The user asks to check, review or audit a whole project | `references/project-check.md` |
 | The change adds or alters a route, handler, form, upload, database query, login, permission, file or network access, secret or package, or shows data in a UI, even if the request does not mention security; any security review | `references/security.md` |
