@@ -22,6 +22,8 @@ Ask them before writing code and when checking existing code; report the answer 
 - Each document states decisions, not background: what to do, what not to do, and when to stop and ask, concretely enough that nothing has to be assumed. Vague documents produce minimal, generic work.
 - Read the index and only the documents the task needs. The number of documents follows the project, not a target; merge or remove what is repeated or unused.
 - A change that alters a decision updates its document in the same step.
+- Give agents a short task card per version or task: one page with every decision that applies, instead of the full wish list. It must be complete; a missing decision is asked, not assumed.
+- Keep every project in a git repository from the start, even if only locally, so agents read diffs instead of whole folders and every state can be restored. Release archives are kept in addition.
 
 ## Structure
 - Write tests before every change and work in small steps, so that after each step it is provable that behavior did not change.
@@ -32,6 +34,7 @@ Ask them before writing code and when checking existing code; report the answer 
 - Break long functions into small functions that do exactly one thing.
 - Replace magic numbers, strings and paths with named constants or a central configuration.
 - Whatever runs unattended is bounded by construction (memory, stored data, anything it learns). The limits themselves are tested and measured in a long run.
+- Build a mock-up or prototype from the product's own code where possible, so every change is made once and the mock-up cannot drift from the product.
 
 ## Architecture
 - Source code dependencies point inward only: business logic names no framework, database or UI. Those are details behind an interface the inner code owns.
@@ -46,6 +49,7 @@ Ask them before writing code and when checking existing code; report the answer 
 - Write integration tests wherever data is serialized or leaves the process (REST, database, files).
 - Test the public interface, not private methods; the urge to test a private method often means the class does too much.
 - Test programs in an isolated container before handing them over, with Docker Desktop or a free alternative (e.g. Podman Desktop, Rancher Desktop, Colima), so results do not depend on the local machine.
+- Provide one check command that runs everything in sequence: build the package, install it in the container, run all tests and scans, and write a log, so no step depends on being remembered.
 - Design priority, in this order: passes the tests, reveals intention, no duplication, fewest elements.
 
 ## Refactoring and modernization

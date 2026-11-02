@@ -7,3 +7,4 @@
 2026-11-02: rules added: failing tests never waved away, checksum proof for restructuring, unattended limits tested, complicated parts measured against a simple variant
 2026-11-02: architecture, tests and simple design, situational refactoring rules and security review principles added; companion tools listed; README updated
 2026-11-02: rule added: test programs in a container (Docker Desktop or a free alternative)
+2026-11-02: rules added: task cards for agents, git from the start, mock-ups built from product code, one check command
