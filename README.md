@@ -37,6 +37,7 @@ The skill answers in the language you write in.
 - Before a change it answers the six questions, with evidence.
 - It adds the security basics (access checks, input validation, output encoding) to every new entry point, even if you did not ask. It does not count them as extra scope.
 - It adds no other functions you did not ask for. It asks first whether they are needed.
+- It compares your instruction with the context and asks about what you may have forgotten, such as follow-up changes or related files.
 - If something is unclear, it asks numbered questions with options and marks its recommendation with ★. A short answer like `1a 2b` is enough.
 - If a test contradicts the specification, it stops and asks instead of changing the test to get green.
 - If you correct a mistake or state a lasting rule, it shows the new wording and adds it only after your yes.
