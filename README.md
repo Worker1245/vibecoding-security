@@ -103,7 +103,7 @@ The aim is to make vibe coding better for you: programs measurably more efficien
 - **It learns on your machine.** Mistakes, your own rules and measurements stay in the `local/` folder, which git ignores. They are never uploaded, and updates cannot overwrite them. The session itself still goes to the model provider as usual.
 - **You stay in control.** After the same mistake happens twice, or when you state a lasting rule, the agent proposes a rule and adds it only after your yes. There are at most 100 own rules. A rule can never lower the security floor.
 - **It measures.** After a check it records numbers only, such as security findings, test results and runtime, and reports the change since the last run. A trend shows a direction, not proof that a rule caused it.
-- **It stays current.** Once a month it proposes removing rules that show no use, compares the security rules with current OWASP guidance and looks for new versions of the security skills. This reads public pages and sends no project data.
+- **It stays current.** Once a month it proposes how to optimize the skill and what to add, compares the security rules with current OWASP guidance and looks for new versions of the security skills. It also proposes removing your own rules if they show no use. This reads public pages and sends no project data.
 
 Published rules are versioned: the last three versions stay in `versions/`, and changes are committed locally and pushed only when you say so.
 
