@@ -13,3 +13,4 @@
 2026-11-02: short help when called without a task; responses in the user's language; load conditions name observable triggers; loaded files are named in one line
 2026-11-02: security floor added to SKILL.md; test rules sharpened (test with every behavior change, no editing tests to get green); references/wordpress.md added; rules on questions, no unrequested functions, own verification, time limits and no silent losses added; self-update now needs the user's yes; SKILL.md re-sorted
 2026-11-02: technical safeguards stay optional; basic and full level described, README explains them in plain words
+2026-11-02: help shows examples; setup check with security tips and full project check added, with scripts/check-setup.sh; monthly update check from GitHub, installed only after the user's yes by merge, keeping own changes

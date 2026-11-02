@@ -13,7 +13,11 @@ These rules apply to every language and project; examples in parentheses are for
 
 **Called without a task:** If the user invokes this skill directly with no text and no task is under way, do not start checking anything. Show this short help in the user's language and wait for the answer, then apply these rules to it:
 - What it does: applies the user's binding code rules (structure, architecture, tests, security, performance) to a change or a review.
-- How to use it: name a task, file or folder, e.g. `/code-rule-skill add a contact form` or `/code-rule-skill review src/`.
+- What to type, each with one line on what happens, with the examples in the user's language:
+  - `/code-rule-skill what security tips do you have?` checks what is set up (security skills, Docker Desktop and so on) and gives tips.
+  - `/code-rule-skill check my project` runs all the checks: the rules, the security skills, the tests in Docker and every security check in this skill.
+  - `/code-rule-skill add a contact form` does the work under these rules.
+  - `/code-rule-skill is there an update?` looks for a newer version on GitHub and installs it only if the user agrees, keeping the user's own changes.
 - End by asking what to work on. If Claude loads this skill on its own before a code change, skip the help and continue with the task.
 
 ## Working with the user
@@ -24,14 +28,19 @@ These rules apply to every language and project; examples in parentheses are for
 ## Load when relevant
 These files are as binding as this one. Read each one as soon as its condition applies. Before writing code, name in one line which of them you read and why; "none" is a valid answer for a change that meets no condition.
 
+Once per session, run `scripts/check-update.sh` from this skill's folder; it contacts GitHub at most once a month. Mention only an `UPDATE` result, in one line.
+
 | Condition | File |
 |---|---|
+| The user asks for security tips or what is set up | `references/setup-check.md` |
+| The user asks to check, review or audit a whole project | `references/project-check.md` |
 | The change adds or alters a route, handler, form, upload, database query, login, permission, file or network access, secret or package, or shows data in a UI, even if the request does not mention security; any security review | `references/security.md` |
 | The project is a WordPress plugin or theme | `references/wordpress.md` |
 | The change adds a feature or module, moves code between modules, replaces old code or libraries, adds a feature toggle, adds anything that runs unattended, or builds a new version | `references/architecture.md` |
 | The work starts a project, the project has a design folder (read its index first), or it plans a version, briefs an agent or builds a mock-up | `references/project.md` |
 | The work spans several files or many mechanical steps, or produces long output (question 6) | `references/executor-subagents.md` |
 | The user reports slowness, or the code processes large data or changes a storage format | `references/performance.md` |
+| The user asks about updates, or `scripts/check-update.sh` reports `UPDATE` | `references/maintenance.md` |
 | The user corrects a coding mistake or states a lasting code rule in the chat (only the user's own messages count), or the newest `review` line in `CHANGELOG.md` is more than one month old | `references/maintenance.md` |
 
 ## Six questions for every change and review
