@@ -14,7 +14,7 @@ Ask them before writing code and when checking existing code; report the answer 
 - **Does OWASP apply?** Map the real entry points first, then name which categories apply and which do not, and why. Harden only along a real attack path; details under Security.
 - **Does YAGNI apply?** Build only what was asked for and is needed now: no speculative options, settings, abstractions or extension points.
 - **What can be reused instead of created?** Look first for an existing function or module in the project, then the standard library, then an established library. Add a dependency only with a reason.
-- **Is everything kept dumb simple (KISS)?** Pick the simplest solution that works; a clever one needs a measured reason.
+- **Is everything kept dumb simple (KISS)?** Pick the simplest solution that works; a clever one needs a measured reason. A learning or complicated part is measured against a simple variant without it before it stays.
 - **Can it be removed without breaking the application?** Parts stay loosely coupled, so a feature, file or dependency can be taken out on its own. What can go without loss is proposed for removal; removing visible behavior needs the user's consent.
 
 ## Project knowledge (design folder)
@@ -25,10 +25,13 @@ Ask them before writing code and when checking existing code; report the answer 
 
 ## Structure
 - Write tests before every change and work in small steps, so that after each step it is provable that behavior did not change.
+- Never wave away a failing test, not even an intermittent one: find the cause. A test depends neither on what earlier tests left behind nor on unseeded randomness.
+- Prove a pure restructuring: compare a checksum of the output before and after; it must be identical.
 - Split the program into modules with one clear responsibility each. Separate input/output (files, network, UI) from computation, so every piece of information has exactly one home and the logic can be tested independently.
 - Group related data into classes or structs instead of scattering it.
 - Break long functions into small functions that do exactly one thing.
 - Replace magic numbers, strings and paths with named constants or a central configuration.
+- Whatever runs unattended is bounded by construction (memory, stored data, anything it learns). The limits themselves are tested and measured in a long run.
 
 ## Refactoring and modernization
 - Look for outdated patterns, libraries or language constructs that have better, established alternatives today, and propose them with reasons.
