@@ -9,4 +9,4 @@ Use this when the user asks for security tips or what is set up. Change and inst
    - No container runtime running: tests depend on this machine. Name Docker Desktop or a free alternative.
    - Missing scanners or skills: name what each would add. Third-party skills are reviewed before installing (e.g. with SkillSpector).
    - Rules are text and cannot force anything: explain the optional technical safeguards from `security.md`.
-4. End with the next step: `/code-rule-skill check my project`, in the user's language. Install something only if the user asks for it.
+4. End with the next step: `/vibecode-help check my project`, in the user's language. Install something only if the user asks for it.
