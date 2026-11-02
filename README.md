@@ -14,6 +14,7 @@ A [Claude Code](https://claude.com/claude-code) skill with language-agnostic rul
 - WordPress plugins and themes
 - Slimming down, speed and data
 - Executor subagents: when one helps, how to brief it, and how to verify its work
+- A prompt creator that sharpens your prompt before any code is written
 - Learning locally: the skill grows with you, under your control, and nothing learned is uploaded
 
 `SKILL.md` holds what applies to every change. Everything else is in `references/` and is read only when its condition applies, which keeps the text loaded per change short.
@@ -25,7 +26,7 @@ Claude loads the skill on its own before code changes. You can also call it your
 - **Only the skill name, nothing else:** If you type just `/code-rule-skill` in the chat and no task is under way, nothing gets checked or changed yet. You get a short help with examples of what to type, and Claude asks what to work on. Your answer starts the work.
 - **`/code-rule-skill what security tips do you have?`** checks what is set up (security skills, scanners, Docker Desktop or an alternative), installs nothing, and gives tips that fit the gaps.
 - **`/code-rule-skill check my project`** runs all checks one after the other: the rules, the project's tests in a container, the scanners and the security skills. Claude shows the plan and starts right away; it asks first only for anything costly, anything that sends data out, and anything it would install. It changes no code and reports what ran, what could not run and what it found.
-- **`/code-rule-skill add a contact form`** does the work under these rules.
+- **`/code-rule-skill` followed by your own prompt** first sharpens the prompt with you: Claude asks what you want to achieve, shows a refined prompt, suggests useful details and asks for the format of the result. Once you are satisfied, it does the work under these rules. Add "directly" to skip the questions.
 - **`/code-rule-skill is there an update?`** looks for a newer version on GitHub.
 
 The skill answers in the language you write in.

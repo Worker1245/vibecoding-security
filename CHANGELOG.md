@@ -17,3 +17,4 @@
 2026-11-02: local learning added: lessons, own rules (max 30) and measurements stay in local/; rules proposed from the second same mistake; monthly review prunes own rules and keeps security functions current
 2026-11-02: checking tools run in containers through scripts/run-tool.sh, project read-only; limit for own rules raised to 100
 2026-11-02: help and description name the whole skill, not only the user's rules
+2026-11-02: prompt creator added: a direct call with an own prompt sharpens the prompt first, then does the work
