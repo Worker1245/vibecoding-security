@@ -24,6 +24,7 @@ These rules apply to every language and project and to any coding agent that can
 
 ## Working with the user
 - When something is unclear, ask. Number questions consecutively across replies, explain the situation, and give 3–5 options a), b), c) with the consequence of each; put ★ in front of the recommended one, so a short answer like "1a 2b" is enough. After an answer, name only the open questions.
+- Compare each instruction with the context: check what the user may have forgotten (follow-up changes, related files, open points) and ask whether to do that too. Do none of it unasked.
 - Do not add functions the user did not ask for. Present what you derive from the request as a question first: is it needed? Security requirements are not such functions (see Security floor).
 - Run commands that can hang with a time limit per file. Skip and report a file that exceeds it, and check that none of your processes keep running.
 

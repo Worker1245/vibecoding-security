@@ -20,3 +20,4 @@
 2026-11-02: prompt creator added: a direct call with an own prompt sharpens the prompt first, then does the work
 2026-11-02: works across agents: neutral wording, setup check looks in the Claude Code, Codex and Copilot skill folders, README shows installation per tool
 2026-11-02: monthly review now optimizes the skill and adds what is missing; length alone is no reason to shorten it
+2026-11-02: rule added: compare instructions with the context and ask about what may be forgotten
