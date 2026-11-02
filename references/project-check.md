@@ -15,7 +15,7 @@ List the checks that will run, those that cannot run and why, the rough duration
 
 ## 3. Run, in this order
 Each step has a time limit. A step that fails or times out is reported, and the next one still runs. Steps waiting for a yes are listed as open in the report.
-Skip a step only if its program or skill is missing, it does not apply (no dependency file, no diff, no confirmed finding), or it waits for a yes. A small project is no reason to skip, and available skills are actually invoked.
+Skip a step only if its program or skill is missing, it does not apply (no dependency file, no diff, no confirmed finding), or it waits for a yes. A small project is no reason to skip. Invoke each available skill with the Skill tool; applying its ideas by hand does not count and is reported as not run.
 1. Rules review: the six questions, the Security floor, Tests, Structure and readability.
 2. The project's own check command and tests, in a container if a runtime is available.
 3. `semgrep`.
@@ -27,7 +27,7 @@ Skip a step only if its program or skill is missing, it does not apply (no depen
 9. `variant-analysis` for each confirmed finding.
 
 ## 4. Verify and report
-- Judge findings by the rules in `security.md`, with a check independent of the one that found them.
+- Judge findings by the rules in `security.md`, with a check independent of the one that found them. A weakness not reachable from a real entry point is `needs_validation`, not confirmed.
 - A table of all checks: ran, skipped or failed, with the reason and the result.
 - Findings by severity, with file and line, as confirmed, `needs_validation` or rejected.
 - Never call a check passed if it did not run. No findings means none were found by the checks that ran, not that the project is secure.
