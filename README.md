@@ -1,4 +1,4 @@
-# vibecode-help
+# vibecoding-security
 
 An [Agent Skill](https://agentskills.io) with language-agnostic rules for writing, refactoring and reviewing code. It works with coding agents that read `SKILL.md`, such as [Claude Code](https://claude.com/claude-code), OpenAI Codex and GitHub Copilot. Install shows how far each one has been tested.
 
@@ -23,11 +23,11 @@ An [Agent Skill](https://agentskills.io) with language-agnostic rules for writin
 
 The agent loads the skill on its own before code changes. You can also call it yourself:
 
-- **Only the skill name, nothing else:** If you type just `/vibecode-help` in the chat and no task is under way, nothing gets checked or changed yet. You get a short help with examples of what to type, and the agent asks what to work on. Your answer starts the work.
-- **`/vibecode-help what security tips do you have?`** checks what is set up (security skills, scanners, Docker Desktop or an alternative), installs nothing, and gives tips that fit the gaps.
-- **`/vibecode-help check my project`** runs all checks one after the other: the rules, the project's tests in a container, the scanners and the security skills. The agent shows the plan and starts right away; it asks first only for anything costly, anything that sends data out, and anything it would install. It changes no code and reports what ran, what could not run and what it found.
-- **`/vibecode-help` followed by your own prompt** first sharpens the prompt with you: the agent asks what you want to achieve, shows a refined prompt, suggests useful details and asks for the format of the result. Once you are satisfied, it does the work under these rules. Add "directly" to skip the questions.
-- **`/vibecode-help is there an update?`** looks for a newer version on GitHub.
+- **Only the skill name, nothing else:** If you type just `/vibecoding-security` in the chat and no task is under way, nothing gets checked or changed yet. You get a short help with examples of what to type, and the agent asks what to work on. Your answer starts the work.
+- **`/vibecoding-security what security tips do you have?`** checks what is set up (security skills, scanners, Docker Desktop or an alternative), installs nothing, and gives tips that fit the gaps.
+- **`/vibecoding-security check my project`** runs all checks one after the other: the rules, the project's tests in a container, the scanners and the security skills. The agent shows the plan and starts right away; it asks first only for anything costly, anything that sends data out, and anything it would install. It changes no code and reports what ran, what could not run and what it found.
+- **`/vibecoding-security` followed by your own prompt** first sharpens the prompt with you: the agent asks what you want to achieve, shows a refined prompt, suggests useful details and asks for the format of the result. Once you are satisfied, it does the work under these rules. Add "directly" to skip the questions.
+- **`/vibecoding-security is there an update?`** looks for a newer version on GitHub.
 
 The skill answers in the language you write in.
 
@@ -47,25 +47,25 @@ The skill answers in the language you write in.
 Clone once, then link it for your tool:
 
 ```bash
-git clone https://github.com/Worker1245/vibecode-help.git
+git clone https://github.com/Worker1245/vibecoding-security.git
 ```
 
 Claude Code:
 
 ```bash
-mkdir -p ~/.claude/skills && ln -s "$PWD/vibecode-help" ~/.claude/skills/vibecode-help
+mkdir -p ~/.claude/skills && ln -s "$PWD/vibecoding-security" ~/.claude/skills/vibecoding-security
 ```
 
 OpenAI Codex:
 
 ```bash
-mkdir -p ~/.agents/skills && ln -s "$PWD/vibecode-help" ~/.agents/skills/vibecode-help
+mkdir -p ~/.agents/skills && ln -s "$PWD/vibecoding-security" ~/.agents/skills/vibecoding-security
 ```
 
 GitHub Copilot (CLI and VS Code):
 
 ```bash
-mkdir -p ~/.copilot/skills && ln -s "$PWD/vibecode-help" ~/.copilot/skills/vibecode-help
+mkdir -p ~/.copilot/skills && ln -s "$PWD/vibecoding-security" ~/.copilot/skills/vibecoding-security
 ```
 
 Or copy the folder there instead; a copied folder cannot update itself.
@@ -73,7 +73,7 @@ Or copy the folder there instead; a copied folder cannot update itself.
 Perplexity Computer: upload a ZIP of the skill, as a skill with its `SKILL.md` at the root. It should run as rules only: as a hosted agent it presumably cannot use the scripts, your Docker or the local `local/` folder, so the local learning does not apply there.
 
 ```bash
-git -C vibecode-help archive --format=zip -o ../vibecode-help.zip HEAD
+git -C vibecoding-security archive --format=zip -o ../vibecoding-security.zip HEAD
 ```
 
 | | Claude Code | Codex | Copilot | Perplexity |
@@ -81,7 +81,7 @@ git -C vibecode-help archive --format=zip -o ../vibecode-help.zip HEAD
 | Tested by the author | yes | no | partly (CLI, non-interactive) | no |
 | Rules | yes | expected | yes | expected |
 | Scripts, Docker, local learning | yes | expected | expected | no |
-| Calling the skill | `/vibecode-help` | `$vibecode-help` or `/skills` | `/vibecode-help` or `/skills` | through its own skills menu |
+| Calling the skill | `/vibecoding-security` | `$vibecoding-security` or `/skills` | `/vibecoding-security` or `/skills` | through its own skills menu |
 
 In the Copilot test, the skill loaded, the help appeared, the extra rule files were read and it answered in the user's language. The prompt creator's questions were skipped in that non-interactive run; interactive use is untested.
 

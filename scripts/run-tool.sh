@@ -7,7 +7,7 @@ set -u
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 readonly ROOT
 readonly SEMGREP_IMAGE="semgrep/semgrep:1.182.1"
-readonly TOOLS_IMAGE="vibecode-help-tools:1"
+readonly TOOLS_IMAGE="vibecoding-security-tools:1"
 readonly COMPOSER_IMAGE="composer:2"
 readonly RUN_LIMIT_SECONDS=900
 readonly PHPSTAN_LEVEL=5

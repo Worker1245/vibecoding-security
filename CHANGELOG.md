@@ -22,3 +22,4 @@
 2026-11-02: monthly review now optimizes the skill and adds what is missing; length alone is no reason to shorten it
 2026-11-02: rule added: compare instructions with the context and ask about what may be forgotten
 2026-11-03: renamed from code-rule-skill to vibecode-help; repository moved to github.com/Worker1245/vibecode-help
+2026-11-03: renamed from vibecode-help to vibecoding-security; repository moved to github.com/Worker1245/vibecoding-security
