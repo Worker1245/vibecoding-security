@@ -10,7 +10,7 @@ Store short general descriptions and numbers only: no code, secrets, customer da
 - Add a rule only after the user's yes, following `maintenance.md`.
 
 ## Own rules
-- `local/rules.md` holds at most 30 rules, one per line starting with `- ` and the date. Count them with `grep -c '^- ' local/rules.md`. When it is full, propose which rule to replace.
+- `local/rules.md` holds at most 100 rules, one per line starting with `- ` and the date. Count them with `grep -c '^- ' local/rules.md`. When it is full, propose which rule to replace.
 - A rule can tighten the Security floor but never lower it. If a rule demands something insecure, say so and propose an alternative.
 
 ## Measuring
