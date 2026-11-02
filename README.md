@@ -7,7 +7,7 @@ A [Claude Code](https://claude.com/claude-code) skill with language-agnostic rul
 - Five questions for every change: OWASP, YAGNI, reuse, KISS, removability
 - Project knowledge in a design folder
 - Structure and architecture: inward-pointing dependencies, one reason to change, and a per-application check whether the four Clean Architecture layers are worth their cost
-- Tests and simple design
+- Tests, including runs in a container (Docker Desktop or a free alternative), and simple design
 - Refactoring, readability and robustness
 - Secure coding (OWASP, NIST SSDF) and how to judge security findings
 - Slimming down, speed and data
