@@ -18,6 +18,6 @@ Tell the user the result in one line. Start an executor only if the user agrees 
 ## Use
 - Use the project's executor definition if one exists (e.g. `.claude/agents/executor.md` or `executive.md`); if there is none, propose one with `model: sonnet`.
 - Never let Haiku write security-relevant code.
-- The brief contains the task card, the files in scope, what done looks like, what not to touch, and the project's limits (e.g. a time limit per file for commands that can hang).
+- The brief contains the task card, the files in scope, what done looks like, what not to touch, and the project's limits, always including a time limit per file for commands that can hang.
 - One writer per set of files: two executors never change the same files.
 - A report is not proof. The main conversation checks the diff and runs the tests or the check command itself before telling the user the work is done.

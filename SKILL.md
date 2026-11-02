@@ -16,13 +16,19 @@ These rules apply to every language and project; examples in parentheses are for
 - How to use it: name a task, file or folder, e.g. `/code-rule-skill add a contact form` or `/code-rule-skill review src/`.
 - End by asking what to work on. If Claude loads this skill on its own before a code change, skip the help and continue with the task.
 
+## Working with the user
+- When something is unclear, ask. Number questions consecutively across replies, explain the situation, and give 3–5 options a), b), c) with the consequence of each; put ★ in front of the recommended one, so a short answer like "1a 2b" is enough. After an answer, name only the open questions.
+- Do not add functions the user did not ask for. Present what you derive from the request as a question first: is it needed? Security requirements are not such functions (see Security floor).
+- Run commands that can hang with a time limit per file. Skip and report a file that exceeds it, and check that none of your processes keep running.
+
 ## Load when relevant
 These files are as binding as this one. Read each one as soon as its condition applies. Before writing code, name in one line which of them you read and why; "none" is a valid answer for a change that meets no condition.
 
 | Condition | File |
 |---|---|
 | The change adds or alters a route, handler, form, upload, database query, login, permission, file or network access, secret or package, or shows data in a UI, even if the request does not mention security; any security review | `references/security.md` |
-| The change adds a feature or module, moves code between modules, replaces old code or libraries, adds a feature toggle, or adds anything that runs unattended | `references/architecture.md` |
+| The project is a WordPress plugin or theme | `references/wordpress.md` |
+| The change adds a feature or module, moves code between modules, replaces old code or libraries, adds a feature toggle, adds anything that runs unattended, or builds a new version | `references/architecture.md` |
 | The work starts a project, the project has a design folder (read its index first), or it plans a version, briefs an agent or builds a mock-up | `references/project.md` |
 | The work spans several files or many mechanical steps, or produces long output (question 6) | `references/executor-subagents.md` |
 | The user reports slowness, or the code processes large data or changes a storage format | `references/performance.md` |
@@ -30,16 +36,27 @@ These files are as binding as this one. Read each one as soon as its condition a
 
 ## Six questions for every change and review
 Ask them before writing code and when checking existing code; report the answer per question, with evidence (measurements, not impressions).
-1. **Does OWASP apply?** Map the real entry points first, then name which categories apply and which do not, and why. Harden only along a real attack path.
-2. **Does YAGNI apply?** Build only what was asked for and is needed now: no speculative options, settings, abstractions or extension points.
+1. **Does OWASP apply?** Map the real entry points first, then name which categories apply and which do not, and why. Beyond the Security floor, harden only along a real attack path.
+2. **Does YAGNI apply?** Build only what was asked for and is needed now: no speculative options, settings, abstractions or extension points. The Security floor is never extra scope.
 3. **What can be reused instead of created?** Look first for an existing function or module in the project, then the standard library, then an established library. Add a dependency only with a reason.
 4. **Is everything kept dumb simple (KISS)?** Pick the simplest solution that works; a clever one needs a measured reason. A learning or complicated part is measured against a simple variant without it before it stays.
 5. **Can it be removed without breaking the application?** Parts stay loosely coupled, so a feature, file or dependency can be taken out on its own. What can go without loss is proposed for removal; removing visible behavior needs the user's consent.
 6. **Can an executor subagent help?** Check it for larger work and tell the user the result in one line, including when the answer is no.
 
+## Security floor
+- Deny by default. Every route, handler and data access checks identity and ownership of that specific object on the server.
+- Security requirements are never extra scope. Every new entry point gets authorization, input validation and context-aware output encoding, even if the request does not mention them.
+- When you add or change a security control, list every sibling entry point and apply it to all, or name the exception.
+- A control existing is not proof. Any table reachable with a public key needs row-level security with a policy; as anonymous and as another user, try to read and write foreign rows.
+- The client is not a security boundary. Roles, prices, payment status and ownership are set or verified on the server only. No tokens in localStorage without a stated reason.
+- Never clear an error by weakening a control: no bypass routes, `verify=False`, `CORS *`, disabled auth or ignored scanner rules. Find the cause, or report that you are stuck.
+- No "for now" security. Unfinished auth fails closed and is listed in your handover. Security primitives never fall back to no protection. Demo code is labelled and cannot ship by default.
+
 ## Tests
-- Write tests before every change and work in small steps, so that after each step it is provable that behavior did not change.
+- Verify your own changes before the user sees them. Every project has a test path (container, headless browser, unit tests) as a fixed part of the cycle; if it is missing, set it up or propose it first.
+- Every behavior change arrives with a test that fails without it. Prefer red/green: write the test, watch it fail, then implement. Work in small steps and run the tests after every edit, so that after each step it is provable that behavior did not change.
 - Never wave away a failing test, not even an intermittent one: find the cause. A test depends neither on what earlier tests left behind nor on unseeded randomness.
+- Do not edit, delete or skip tests, or special-case test inputs, to get green. If a test conflicts with the spec, stop and flag it.
 - Prove a pure restructuring: compare a checksum of the output before and after; it must be identical.
 - Many fast unit tests, few end-to-end tests for the critical flows. Reproduce a bug found by a large test in a unit test before fixing it.
 - Write integration tests wherever data is serialized or leaves the process (REST, database, files).

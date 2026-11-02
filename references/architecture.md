@@ -11,6 +11,7 @@
 ## Refactoring and modernization
 - Look for outdated patterns, libraries or language constructs that have better, established alternatives today, and propose them with reasons.
 - Before a larger restructuring, state the plan briefly and wait for approval.
+- A new version (program, mock-up, document) loses nothing silently, even when it is built differently. Before building, list the functions of the previous version, explicitly including test and demo helpers. Afterwards check the list point by point; name what is dropped or impossible when handing over, and remove something only after the user's consent.
 - Replace legacy code gradually: build the new part alongside the old and move behavior over; no rewrite in one step.
 - Keep the place that checks a feature toggle apart from the logic that decides it, and remove the toggle once it is no longer needed.
 - Treat a code smell as a prompt to look, not as a defect: confirm a real problem before changing the code.

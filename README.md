@@ -4,12 +4,14 @@ A [Claude Code](https://claude.com/claude-code) skill with language-agnostic rul
 
 ## What it covers
 
+- How to work with the user: numbered questions with options, no functions nobody asked for
 - Six questions for every change: OWASP, YAGNI, reuse, KISS, removability, executor subagent
 - Project knowledge: design folder, short task cards for agents, git from the start
 - Structure and architecture: inward-pointing dependencies, one reason to change, and a per-application check whether the four Clean Architecture layers are worth their cost
 - Tests, including runs in a container (Docker Desktop or a free alternative) and one check command, and simple design
 - Refactoring, readability and robustness
-- Secure coding (OWASP, NIST SSDF) and how to judge security findings
+- A security floor for every change, secure coding (OWASP, NIST SSDF) and how to judge security findings
+- WordPress plugins and themes
 - Slimming down, speed and data
 - Executor subagents: when one helps, how to brief it, and how to verify its work
 
@@ -26,7 +28,7 @@ The skill answers in the language you write in.
 
 ## Self-maintenance
 
-The skill maintains itself: when the user corrects a coding mistake or states a lasting rule, Claude adds it to `SKILL.md`, keeps the last three versions locally in `versions/` and commits the change. Once a month it proposes a cleanup.
+The skill maintains itself: when the user corrects a coding mistake or states a lasting rule, Claude proposes the new wording and, after your yes, adds it to the skill, keeps the last three versions locally in `versions/` and commits the change. Once a month it proposes a cleanup.
 
 ## Install
 
