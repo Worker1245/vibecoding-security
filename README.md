@@ -1,6 +1,6 @@
 # code-rule-skill
 
-A [Claude Code](https://claude.com/claude-code) skill with language-agnostic rules for writing, refactoring and reviewing code.
+An [Agent Skill](https://agentskills.io) with language-agnostic rules for writing, refactoring and reviewing code. Built and tested for [Claude Code](https://claude.com/claude-code); it also fits other agents that read `SKILL.md` (see Install).
 
 ## What it covers
 
@@ -43,12 +43,46 @@ The skill answers in the language you write in.
 
 ## Install
 
+Clone once, then link it for your tool:
+
 ```bash
 git clone https://github.com/Worker1245/code-rule-skill.git
-ln -s "$PWD/code-rule-skill" ~/.claude/skills/code-rule-skill
 ```
 
-Or copy the folder to `~/.claude/skills/code-rule-skill`.
+Claude Code:
+
+```bash
+mkdir -p ~/.claude/skills && ln -s "$PWD/code-rule-skill" ~/.claude/skills/code-rule-skill
+```
+
+OpenAI Codex:
+
+```bash
+mkdir -p ~/.agents/skills && ln -s "$PWD/code-rule-skill" ~/.agents/skills/code-rule-skill
+```
+
+GitHub Copilot (CLI and VS Code):
+
+```bash
+mkdir -p ~/.copilot/skills && ln -s "$PWD/code-rule-skill" ~/.copilot/skills/code-rule-skill
+```
+
+Or copy the folder there instead; a copied folder cannot update itself.
+
+Perplexity Computer: upload a ZIP of the skill, as a skill with its `SKILL.md` at the root. It should run as rules only: as a hosted agent it presumably cannot use the scripts, your Docker or the local `local/` folder, so the local learning does not apply there.
+
+```bash
+git -C code-rule-skill archive --format=zip -o ../code-rule-skill.zip HEAD
+```
+
+| | Claude Code | Codex | Copilot | Perplexity |
+|---|---|---|---|---|
+| Tested by the author | yes | no | partly (CLI, non-interactive) | no |
+| Rules | yes | expected | yes | expected |
+| Scripts, Docker, local learning | yes | expected | expected | no |
+| Calling the skill | `/code-rule-skill` | `$code-rule-skill` or `/skills` | `/code-rule-skill` or `/skills` | through its own skills menu |
+
+In the Copilot test, the skill loaded, the help appeared, the extra rule files were read and it answered in the user's language. The prompt creator's questions were skipped in that non-interactive run; interactive use is untested. Everything else in this README says Claude for the agent; the same applies to the agent you use.
 
 ## Checking tools in containers
 
@@ -78,7 +112,7 @@ Published rules are versioned: the last three versions stay in `versions/`, and 
 This skill is text. Claude normally follows it, but it can overlook or misjudge a rule, and nothing forces it to comply. A technical safeguard works like a lock instead of a sign: the software enforces it, whatever Claude decides. None is set up by default. Claude can set up either level on request and agrees on each safeguard with you first.
 
 **Basic**
-- *Blocked commands and files:* Claude Code refuses dangerous commands, such as deleting a database, and does not open files containing passwords.
+- *Blocked commands and files:* the agent refuses dangerous commands, such as deleting a database, and does not open files containing passwords.
 - *Secret scan:* before each commit, a small program checks whether a password or key would end up in the code, and stops the commit if so.
 
 **Full: Basic plus**

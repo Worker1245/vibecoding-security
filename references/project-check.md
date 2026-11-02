@@ -16,7 +16,7 @@ List the checks that will run, those that cannot run and why, the rough duration
 
 ## 3. Run, in this order
 Each step has a time limit. A step that fails or times out is reported, and the next one still runs. Steps waiting for a yes are listed as open in the report.
-Skip a step only if its program or skill is missing, it does not apply (no dependency file, no diff, no confirmed finding), or it waits for a yes. A small project is no reason to skip. Invoke each available skill with the Skill tool; applying its ideas by hand does not count and is reported as not run.
+Skip a step only if its program or skill is missing, it does not apply (no dependency file, no diff, no confirmed finding), or it waits for a yes. A small project is no reason to skip. Actually invoke each available skill; applying its ideas by hand does not count and is reported as not run.
 1. Rules review: the six questions, the Security floor, Tests, Structure and readability.
 2. The project's own check command and tests, in a container if a runtime is available.
 3. `semgrep`. If the program is missing, run `scripts/run-tool.sh semgrep <project>` instead. Clean scanner results do not settle access control, so this does not replace step 1.

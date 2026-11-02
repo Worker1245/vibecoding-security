@@ -13,7 +13,7 @@ WordPress applies its plugin guidelines regardless of how the code was produced,
 
 ## Files and lifecycle
 - Files with top-level code start with the `ABSPATH` guard. Prefix all globals. Remove data only on uninstall, never on deactivation.
-- Do not ship AI configuration (`CLAUDE.md`, `.claude/`) in release packages; exclude it via the build or `.distignore`.
+- Do not ship AI configuration (`CLAUDE.md`, `.claude/`, `AGENTS.md`, `.agents/`, `.github/copilot-instructions.md`) in release packages; exclude it via the build or `.distignore`.
 - Use `strict_types` with care: type hook callbacks loosely and validate inside. This is untested guidance, so verify it in the project.
 
 ## Checks
