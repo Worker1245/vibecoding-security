@@ -9,6 +9,14 @@ These rules apply to every language and project; examples in parentheses are for
 
 **Core principle:** Pure refactoring must not change visible behavior. Propose behavior changes separately and implement them only after the user agrees.
 
+## Five questions for every change and review
+Ask them before writing code and when checking existing code; report the answer per question, with evidence (measurements, not impressions).
+- **Does OWASP apply?** Map the real entry points first, then name which categories apply and which do not, and why. Harden only along a real attack path; details under Security.
+- **Does YAGNI apply?** Build only what was asked for and is needed now: no speculative options, settings, abstractions or extension points.
+- **What can be reused instead of created?** Look first for an existing function or module in the project, then the standard library, then an established library. Add a dependency only with a reason.
+- **Is everything kept dumb simple (KISS)?** Pick the simplest solution that works; a clever one needs a measured reason.
+- **Can it be removed without breaking the application?** Parts stay loosely coupled, so a feature, file or dependency can be taken out on its own. What can go without loss is proposed for removal; removing visible behavior needs the user's consent.
+
 ## Structure
 - Write tests before every change and work in small steps, so that after each step it is provable that behavior did not change.
 - Split the program into modules with one clear responsibility each. Separate input/output (files, network, UI) from computation, so every piece of information has exactly one home and the logic can be tested independently.
