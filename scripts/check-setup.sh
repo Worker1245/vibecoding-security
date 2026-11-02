@@ -3,7 +3,8 @@
 # Output, one per line: STATUS KIND NAME, with STATUS being OK, MISSING or STOPPED.
 set -u
 
-SKILLS_DIR="${CLAUDE_SKILLS_DIR:-$HOME/.claude/skills}"
+# Where Claude Code, Codex and GitHub Copilot keep personal skills.
+readonly SKILL_FOLDERS="$HOME/.claude/skills $HOME/.agents/skills $HOME/.copilot/skills"
 CHECK_TIMEOUT="${CHECK_TIMEOUT:-5}"
 readonly SKILLS="owasp-security semgrep differential-review variant-analysis supply-chain-risk-auditor security-audit"
 readonly PROGRAMS="git semgrep skillspector agnix npm pip-audit composer php phpcs phpstan wp-env"
@@ -12,8 +13,16 @@ readonly DESKTOP_APP="/Applications/Docker.app"
 
 report() { printf '%-8s %-10s %s\n' "$1" "$2" "$3"; }
 
+skill_installed() {
+  local folder
+  for folder in $SKILL_FOLDERS; do
+    [ -f "$folder/$1/SKILL.md" ] && return 0
+  done
+  return 1
+}
+
 for skill in $SKILLS; do
-  if [ -f "$SKILLS_DIR/$skill/SKILL.md" ]; then
+  if skill_installed "$skill"; then
     report OK skill "$skill"
   else
     report MISSING skill "$skill"

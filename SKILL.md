@@ -5,20 +5,22 @@ description: Binding rules for writing, revising, refactoring and reviewing code
 
 # Code rules
 
-These rules apply to every language and project; examples in parentheses are for Python and carry over analogously. Project rules (the project's CLAUDE.md) take precedence where they are stricter or more specific.
+These rules apply to every language and project and to any coding agent that can read this skill (Claude Code, Codex, GitHub Copilot and others); examples in parentheses are for Python and carry over analogously. Project rules (the project's `CLAUDE.md`, `AGENTS.md` or similar) take precedence where they are stricter or more specific.
 
 **Core principle:** Pure refactoring must not change visible behavior. Propose behavior changes separately and implement them only after the user agrees.
 
 **Language:** Always respond in the language the user writes in, including help, questions and reports. These rule files stay in English.
+
+**Where this runs:** Commands below use `/code-rule-skill`; use your tool's own way of calling a skill. Where the environment cannot run the scripts or keep the `local/` folder (e.g. a hosted agent), apply the rules as text, and say which steps cannot run and that nothing is stored on the user's machine.
 
 **Called without a task:** If the user invokes this skill directly with no text and no task is under way, do not start checking anything. Show this short help in the user's language and wait for the answer, then apply these rules to it:
 - What it does: applies everything in this skill to a change or a review: six questions for every change, a security floor, tests in a container, architecture, readability, WordPress rules, performance, security scanners and security skills, plus the user's own learned rules.
 - What to type, each with one line on what happens, with the examples in the user's language:
   - `/code-rule-skill what security tips do you have?` checks what is set up (security skills, Docker Desktop and so on) and gives tips.
   - `/code-rule-skill check my project` runs all the checks: the rules, the security skills, the tests in Docker and every security check in this skill.
-  - `/code-rule-skill` followed by your own prompt: Claude first sharpens the prompt with you through questions, then does the work under these rules once you are satisfied. Add "directly" to skip the questions.
+  - `/code-rule-skill` followed by your own prompt: the agent first sharpens the prompt with you through questions, then does the work under these rules once you are satisfied. Add "directly" to skip the questions.
   - `/code-rule-skill is there an update?` looks for a newer version on GitHub and installs it only if the user agrees, keeping the user's own changes.
-- End by asking what to work on. If Claude loads this skill on its own before a code change, skip the help and continue with the task.
+- End by asking what to work on. If the agent loads this skill on its own before a code change, skip the help and continue with the task.
 
 ## Working with the user
 - When something is unclear, ask. Number questions consecutively across replies, explain the situation, and give 3–5 options a), b), c) with the consequence of each; put ★ in front of the recommended one, so a short answer like "1a 2b" is enough. After an answer, name only the open questions.
