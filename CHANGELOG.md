@@ -16,3 +16,4 @@
 2026-11-02: help shows examples; setup check with security tips and full project check added, with scripts/check-setup.sh; monthly update check from GitHub, installed only after the user's yes by merge, keeping own changes
 2026-11-02: local learning added: lessons, own rules (max 30) and measurements stay in local/; rules proposed from the second same mistake; monthly review prunes own rules and keeps security functions current
 2026-11-02: checking tools run in containers through scripts/run-tool.sh, project read-only; limit for own rules raised to 100
+2026-11-02: help and description name the whole skill, not only the user's rules
