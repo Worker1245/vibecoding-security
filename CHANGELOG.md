@@ -8,3 +8,4 @@
 2026-11-02: architecture, tests and simple design, situational refactoring rules and security review principles added; companion tools listed; README updated
 2026-11-02: rule added: test programs in a container (Docker Desktop or a free alternative)
 2026-11-02: rules added: task cards for agents, git from the start, mock-ups built from product code, one check command
+2026-11-02: restructured into a short SKILL.md and references/ loaded on condition; duplicates merged; executor subagent check added as question 6; description shortened
