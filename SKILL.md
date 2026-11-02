@@ -17,6 +17,12 @@ Ask them before writing code and when checking existing code; report the answer 
 - **Is everything kept dumb simple (KISS)?** Pick the simplest solution that works; a clever one needs a measured reason.
 - **Can it be removed without breaking the application?** Parts stay loosely coupled, so a feature, file or dependency can be taken out on its own. What can go without loss is proposed for removal; removing visible behavior needs the user's consent.
 
+## Project knowledge (design folder)
+- In a larger project keep a design folder that is read before any work starts: one index file listing every design document with one line on its purpose, and one document per user journey or feature.
+- Each document states decisions, not background: what to do, what not to do, and when to stop and ask, concretely enough that nothing has to be assumed. Vague documents produce minimal, generic work.
+- Read the index and only the documents the task needs. The number of documents follows the project, not a target; merge or remove what is repeated or unused.
+- A change that alters a decision updates its document in the same step.
+
 ## Structure
 - Write tests before every change and work in small steps, so that after each step it is provable that behavior did not change.
 - Split the program into modules with one clear responsibility each. Separate input/output (files, network, UI) from computation, so every piece of information has exactly one home and the logic can be tested independently.
