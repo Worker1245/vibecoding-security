@@ -39,6 +39,22 @@ ln -s "$PWD/code-rule-skill" ~/.claude/skills/code-rule-skill
 
 Or copy the folder to `~/.claude/skills/code-rule-skill`.
 
+## Optional technical safeguards
+
+This skill is text. Claude normally follows it, but it can overlook or misjudge a rule, and nothing forces it to comply. A technical safeguard works like a lock instead of a sign: the software enforces it, whatever Claude decides. None is set up by default. Claude can set up either level on request and agrees on each safeguard with you first.
+
+**Basic**
+- *Blocked commands and files:* Claude Code refuses dangerous commands, such as deleting a database, and does not open files containing passwords.
+- *Secret scan:* before each commit, a small program checks whether a password or key would end up in the code, and stops the commit if so.
+
+**Full: Basic plus**
+- *Sandbox:* Claude works in a closed room, so it cannot reach the rest of your computer or send data out freely.
+- *Package check:* before an add-on is installed, a check confirms it really exists and is not suspiciously new. AI sometimes invents package names, and attackers register such names.
+- *Test-change notice:* you are told when existing tests were changed, so a failing test cannot quietly be made to pass.
+- *Extended check command:* one command also runs code analysis and looks for secrets and known vulnerabilities in add-ons.
+
+The price is one round of setup, more confirmation prompts and an occasional false alarm.
+
 ## Optional companion tools
 
 The skill points to these where they help. None is required or bundled; install them separately and review third-party skills first.

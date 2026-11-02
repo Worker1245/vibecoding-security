@@ -29,3 +29,8 @@ Use these skills where installed; otherwise continue with the rules above:
 - `security-audit`: comprehensive audit of a whole codebase.
 - [SkillSpector](https://github.com/NVIDIA/SkillSpector): scan a skill before installing or publishing it, when a project builds or installs skills.
 - [OpenAnt](https://github.com/knostic/OpenAnt): optional second opinion, mention only; install or run it only at the user's request. PHP support is beta, it needs a separately billed API key with no spend limit, and code goes to the chosen LLM provider unless a local model is used.
+
+## Optional technical safeguards
+This skill is text: it instructs Claude but cannot force anything. No technical safeguard is set up by default. When the work touches production data, destructive actions or secrets, mention this once and offer the two levels below in plain words. Set them up only at the user's request, and agree on each one first.
+- **Basic:** block destructive commands and secret files through permission rules, plus a secret scan before each commit.
+- **Full:** Basic, plus a sandbox, a package check, a notice when existing tests change, and an extended check command.
