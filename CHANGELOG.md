@@ -6,3 +6,4 @@
 2026-11-02: design folder rule added (index read first, one document per journey or feature, explicit do, do not, stop)
 2026-11-02: rules added: failing tests never waved away, checksum proof for restructuring, unattended limits tested, complicated parts measured against a simple variant
 2026-11-02: architecture, tests and simple design, situational refactoring rules and security review principles added; companion tools listed; README updated
+2026-11-02: rule added: test programs in a container (Docker Desktop or a free alternative)

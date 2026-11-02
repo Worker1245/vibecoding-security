@@ -45,6 +45,7 @@ Ask them before writing code and when checking existing code; report the answer 
 - Many fast unit tests, few end-to-end tests for the critical flows. Reproduce a bug found by a large test in a unit test before fixing it.
 - Write integration tests wherever data is serialized or leaves the process (REST, database, files).
 - Test the public interface, not private methods; the urge to test a private method often means the class does too much.
+- Test programs in an isolated container before handing them over, with Docker Desktop or a free alternative (e.g. Podman Desktop, Rancher Desktop, Colima), so results do not depend on the local machine.
 - Design priority, in this order: passes the tests, reveals intention, no duplication, fewest elements.
 
 ## Refactoring and modernization
