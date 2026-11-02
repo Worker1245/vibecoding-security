@@ -33,10 +33,27 @@ Ask them before writing code and when checking existing code; report the answer 
 - Replace magic numbers, strings and paths with named constants or a central configuration.
 - Whatever runs unattended is bounded by construction (memory, stored data, anything it learns). The limits themselves are tested and measured in a long run.
 
+## Architecture
+- Source code dependencies point inward only: business logic names no framework, database or UI. Those are details behind an interface the inner code owns.
+- Data crossing a boundary is a simple structure shaped for the inner side, never a database row or framework object. SQL stays in the persistence layer.
+- A module has one reason to change: keep together what changes for the same reason, separate what changes for different reasons.
+- Top-level folders name what the application does, not the framework, where the framework allows it.
+- Start with presentation, domain logic and data access separated; split larger systems by domain first, then by layer.
+- For each application, check whether the four Clean Architecture layers (entities, use cases, interface adapters, frameworks and drivers) are worth their cost, and state the result in one line. Use them only if size and expected change justify it; the dependency rule above applies regardless.
+
+## Tests and simple design
+- Many fast unit tests, few end-to-end tests for the critical flows. Reproduce a bug found by a large test in a unit test before fixing it.
+- Write integration tests wherever data is serialized or leaves the process (REST, database, files).
+- Test the public interface, not private methods; the urge to test a private method often means the class does too much.
+- Design priority, in this order: passes the tests, reveals intention, no duplication, fewest elements.
+
 ## Refactoring and modernization
 - Look for outdated patterns, libraries or language constructs that have better, established alternatives today, and propose them with reasons.
 - Size limits (tell the user these): split files from about 400 lines (excluding tests, translations, migrations) by topic; split functions from about 40 lines or when they do more than one thing. Smaller units are easier to maintain for humans and AI.
 - Before a larger restructuring, state the plan briefly and wait for approval.
+- Replace legacy code gradually: build the new part alongside the old and move behavior over; no rewrite in one step.
+- Keep the place that checks a feature toggle apart from the logic that decides it, and remove the toggle once it is no longer needed.
+- Treat a code smell as a prompt to look, not as a defect: confirm a real problem before changing the code.
 
 ## Readability and robustness
 - Use descriptive names and follow the language's style guide (e.g. PEP 8, the project's linter/formatter), so code reads without extra comments.
@@ -56,7 +73,22 @@ Ask them before writing code and when checking existing code; report the answer 
 - Memory safety: in C/C++ avoid unsafe functions (e.g. `strcpy`, `gets`); prefer memory-safe languages (e.g. Rust) where possible.
 - Check dependencies for known vulnerabilities (e.g. `npm audit`, `pip-audit`), update outdated versions and tell the user what changed; add new dependencies only with a reason.
 - Benchmarks: current OWASP guidance (Top 10, ASVS), NIST Secure Software Development Framework (SSDF), SEI CERT Coding Standards. Always state the security trade-offs of a change.
-- For comprehensive reviews use the `security-audit` skill.
+
+## Judging and finding security issues
+- Whoever checks a finding did not find it; the checker tries to disprove it.
+- Severity requires concrete impact, not deviation from a checklist.
+- If one layer already prevents the attack, a missing further layer is a hardening note, not a vulnerability.
+- A lead without proof stays `needs_validation`, with the exact open fact; never report it as confirmed.
+
+Use these skills where installed; otherwise continue with the rules above:
+- `owasp-security`: secure implementation and focused security review.
+- `semgrep`: static pattern scan, including PHP and WordPress code.
+- `differential-review`: security review of a diff or pull request.
+- `variant-analysis`: after a bug is found, search for the same root cause elsewhere.
+- `supply-chain-risk-auditor`: dependency audit for npm, Python and Go, not Composer. It sends dependency names to external services.
+- `security-audit`: comprehensive audit of a whole codebase.
+- [SkillSpector](https://github.com/NVIDIA/SkillSpector): scan a skill before installing or publishing it, when a project builds or installs skills.
+- [OpenAnt](https://github.com/knostic/OpenAnt): optional second opinion, mention only; install or run it only at the user's request. PHP support is beta, it needs a separately billed API key with no spend limit, and code goes to the chosen LLM provider unless a local model is used.
 
 ## Slimming down
 - Remove duplicate code, unused code, unused imports and unnecessary dependencies, so every piece of logic exists exactly once and the program is smaller and starts faster.
