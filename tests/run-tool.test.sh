@@ -43,6 +43,8 @@ expect_call "image is built when missing" 'build '
 
 reset; run composer-audit "$TMP/project"; [ $? -eq 4 ] || fail "composer-audit without lock file must return 4"
 touch "$TMP/project/composer.lock"
+run composer-audit "$TMP/project"; [ $? -eq 4 ] || fail "composer-audit without composer.json must return 4"
+touch "$TMP/project/composer.json"
 reset; run composer-audit "$TMP/project" || fail "composer-audit failed"
 expect_call "composer-audit read-only" ':/src:ro'
 expect_call "composer-audit locked" 'audit .*--locked'

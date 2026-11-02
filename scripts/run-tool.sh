@@ -52,8 +52,8 @@ case "$tool" in
     ;;
   composer-audit)
     # Asks Packagist about the locked package names; sends no code.
-    if [ ! -f "$project/composer.lock" ]; then
-      echo "no composer.lock in this project" >&2
+    if [ ! -f "$project/composer.lock" ] || [ ! -f "$project/composer.json" ]; then
+      echo "this project has no composer.json with composer.lock" >&2
       exit 4
     fi
     limited docker run --rm -v "$MOUNT" -w /src "$COMPOSER_IMAGE" audit --locked --no-interaction
