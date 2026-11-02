@@ -1,6 +1,6 @@
 # code-rule-skill
 
-An [Agent Skill](https://agentskills.io) with language-agnostic rules for writing, refactoring and reviewing code. Built and tested for [Claude Code](https://claude.com/claude-code); it also fits other agents that read `SKILL.md` (see Install).
+An [Agent Skill](https://agentskills.io) with language-agnostic rules for writing, refactoring and reviewing code. It works with coding agents that read `SKILL.md`, such as [Claude Code](https://claude.com/claude-code), OpenAI Codex and GitHub Copilot. Install shows how far each one has been tested.
 
 ## What it covers
 
@@ -21,17 +21,17 @@ An [Agent Skill](https://agentskills.io) with language-agnostic rules for writin
 
 ## How to use it
 
-Claude loads the skill on its own before code changes. You can also call it yourself:
+The agent loads the skill on its own before code changes. You can also call it yourself:
 
-- **Only the skill name, nothing else:** If you type just `/code-rule-skill` in the chat and no task is under way, nothing gets checked or changed yet. You get a short help with examples of what to type, and Claude asks what to work on. Your answer starts the work.
+- **Only the skill name, nothing else:** If you type just `/code-rule-skill` in the chat and no task is under way, nothing gets checked or changed yet. You get a short help with examples of what to type, and the agent asks what to work on. Your answer starts the work.
 - **`/code-rule-skill what security tips do you have?`** checks what is set up (security skills, scanners, Docker Desktop or an alternative), installs nothing, and gives tips that fit the gaps.
-- **`/code-rule-skill check my project`** runs all checks one after the other: the rules, the project's tests in a container, the scanners and the security skills. Claude shows the plan and starts right away; it asks first only for anything costly, anything that sends data out, and anything it would install. It changes no code and reports what ran, what could not run and what it found.
-- **`/code-rule-skill` followed by your own prompt** first sharpens the prompt with you: Claude asks what you want to achieve, shows a refined prompt, suggests useful details and asks for the format of the result. Once you are satisfied, it does the work under these rules. Add "directly" to skip the questions.
+- **`/code-rule-skill check my project`** runs all checks one after the other: the rules, the project's tests in a container, the scanners and the security skills. The agent shows the plan and starts right away; it asks first only for anything costly, anything that sends data out, and anything it would install. It changes no code and reports what ran, what could not run and what it found.
+- **`/code-rule-skill` followed by your own prompt** first sharpens the prompt with you: the agent asks what you want to achieve, shows a refined prompt, suggests useful details and asks for the format of the result. Once you are satisfied, it does the work under these rules. Add "directly" to skip the questions.
 - **`/code-rule-skill is there an update?`** looks for a newer version on GitHub.
 
 The skill answers in the language you write in.
 
-**What you will see while Claude works under the rules:**
+**What you will see while the agent works under the rules:**
 
 - It names in one line which extra rule files it read and why.
 - Before a change it answers the six questions, with evidence.
@@ -82,7 +82,7 @@ git -C code-rule-skill archive --format=zip -o ../code-rule-skill.zip HEAD
 | Scripts, Docker, local learning | yes | expected | expected | no |
 | Calling the skill | `/code-rule-skill` | `$code-rule-skill` or `/skills` | `/code-rule-skill` or `/skills` | through its own skills menu |
 
-In the Copilot test, the skill loaded, the help appeared, the extra rule files were read and it answered in the user's language. The prompt creator's questions were skipped in that non-interactive run; interactive use is untested. Everything else in this README says Claude for the agent; the same applies to the agent you use.
+In the Copilot test, the skill loaded, the help appeared, the extra rule files were read and it answered in the user's language. The prompt creator's questions were skipped in that non-interactive run; interactive use is untested.
 
 ## Checking tools in containers
 
@@ -101,7 +101,7 @@ If you installed the skill with `git clone`, it looks for a newer version on Git
 The aim is to make vibe coding better for you: programs measurably more efficient and more secure.
 
 - **It learns on your machine.** Mistakes, your own rules and measurements stay in the `local/` folder, which git ignores. They are never uploaded, and updates cannot overwrite them. The session itself still goes to the model provider as usual.
-- **You stay in control.** After the same mistake happens twice, or when you state a lasting rule, Claude proposes a rule and adds it only after your yes. There are at most 100 own rules. A rule can never lower the security floor.
+- **You stay in control.** After the same mistake happens twice, or when you state a lasting rule, the agent proposes a rule and adds it only after your yes. There are at most 100 own rules. A rule can never lower the security floor.
 - **It measures.** After a check it records numbers only, such as security findings, test results and runtime, and reports the change since the last run. A trend shows a direction, not proof that a rule caused it.
 - **It stays current.** Once a month it proposes removing rules that show no use, compares the security rules with current OWASP guidance and looks for new versions of the security skills. This reads public pages and sends no project data.
 
@@ -109,14 +109,14 @@ Published rules are versioned: the last three versions stay in `versions/`, and 
 
 ## Optional technical safeguards
 
-This skill is text. Claude normally follows it, but it can overlook or misjudge a rule, and nothing forces it to comply. A technical safeguard works like a lock instead of a sign: the software enforces it, whatever Claude decides. None is set up by default. Claude can set up either level on request and agrees on each safeguard with you first.
+This skill is text. The agent normally follows it, but it can overlook or misjudge a rule, and nothing forces it to comply. A technical safeguard works like a lock instead of a sign: the software enforces it, whatever the agent decides. None is set up by default. The agent can set up either level on request and agrees on each safeguard with you first.
 
 **Basic**
 - *Blocked commands and files:* the agent refuses dangerous commands, such as deleting a database, and does not open files containing passwords.
 - *Secret scan:* before each commit, a small program checks whether a password or key would end up in the code, and stops the commit if so.
 
 **Full: Basic plus**
-- *Sandbox:* Claude works in a closed room, so it cannot reach the rest of your computer or send data out freely.
+- *Sandbox:* the agent works in a closed room, so it cannot reach the rest of your computer or send data out freely.
 - *Package check:* before an add-on is installed, a check confirms it really exists and is not suspiciously new. AI sometimes invents package names, and attackers register such names.
 - *Test-change notice:* you are told when existing tests were changed, so a failing test cannot quietly be made to pass.
 - *Extended check command:* one command also runs code analysis and looks for secrets and known vulnerabilities in add-ons.
