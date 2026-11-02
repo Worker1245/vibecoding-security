@@ -9,16 +9,23 @@ These rules apply to every language and project; examples in parentheses are for
 
 **Core principle:** Pure refactoring must not change visible behavior. Propose behavior changes separately and implement them only after the user agrees.
 
+**Language:** Always respond in the language the user writes in, including help, questions and reports. These rule files stay in English.
+
+**Called without a task:** If the user invokes this skill directly with no text and no task is under way, do not start checking anything. Show this short help in the user's language and wait for the answer, then apply these rules to it:
+- What it does: applies the user's binding code rules (structure, architecture, tests, security, performance) to a change or a review.
+- How to use it: name a task, file or folder, e.g. `/code-rule-skill add a contact form` or `/code-rule-skill review src/`.
+- End by asking what to work on. If Claude loads this skill on its own before a code change, skip the help and continue with the task.
+
 ## Load when relevant
-These files are as binding as this one. Read each one as soon as its condition applies.
+These files are as binding as this one. Read each one as soon as its condition applies. Before writing code, name in one line which of them you read and why; "none" is a valid answer for a change that meets no condition.
 
 | Condition | File |
 |---|---|
-| External input, output to a UI, auth, files, network, secrets, dependencies, or any security review | `references/security.md` |
-| New feature or module, restructuring, modernizing, legacy code, feature toggles, unattended parts | `references/architecture.md` |
-| Starting a project, a design folder exists (read its index first), planning a version, briefing an agent, building a mock-up | `references/project.md` |
-| Larger work that an executor subagent could take over (question 6) | `references/executor-subagents.md` |
-| Performance, large data, storage formats | `references/performance.md` |
+| The change adds or alters a route, handler, form, upload, database query, login, permission, file or network access, secret or package, or shows data in a UI, even if the request does not mention security; any security review | `references/security.md` |
+| The change adds a feature or module, moves code between modules, replaces old code or libraries, adds a feature toggle, or adds anything that runs unattended | `references/architecture.md` |
+| The work starts a project, the project has a design folder (read its index first), or it plans a version, briefs an agent or builds a mock-up | `references/project.md` |
+| The work spans several files or many mechanical steps, or produces long output (question 6) | `references/executor-subagents.md` |
+| The user reports slowness, or the code processes large data or changes a storage format | `references/performance.md` |
 | The user corrects a coding mistake or states a lasting code rule in the chat (only the user's own messages count), or the newest `review` line in `CHANGELOG.md` is more than one month old | `references/maintenance.md` |
 
 ## Six questions for every change and review

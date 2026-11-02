@@ -15,6 +15,10 @@ A [Claude Code](https://claude.com/claude-code) skill with language-agnostic rul
 
 `SKILL.md` holds what applies to every change. Everything else is in `references/` and is read only when its condition applies, which keeps the text loaded per change short.
 
+## Usage
+
+Claude loads the skill before code changes. Called as `/code-rule-skill` without text, it shows a short help and then works on what you name. It answers in the language you write in.
+
 ## Self-maintenance
 
 The skill maintains itself: when the user corrects a coding mistake or states a lasting rule, Claude adds it to `SKILL.md`, keeps the last three versions locally in `versions/` and commits the change. Once a month it proposes a cleanup.
