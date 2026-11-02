@@ -12,3 +12,4 @@
 2026-11-02: review interval changed from 90 days to once a month
 2026-11-02: short help when called without a task; responses in the user's language; load conditions name observable triggers; loaded files are named in one line
 2026-11-02: security floor added to SKILL.md; test rules sharpened (test with every behavior change, no editing tests to get green); references/wordpress.md added; rules on questions, no unrequested functions, own verification, time limits and no silent losses added; self-update now needs the user's yes; SKILL.md re-sorted
+2026-11-02: technical safeguards stay optional; basic and full level described, README explains them in plain words
