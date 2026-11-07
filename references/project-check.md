@@ -20,7 +20,7 @@ Skip a step only if its program or skill is missing, it does not apply (no depen
 1. Rules review: the six questions, the Security floor, Tests, Structure and readability.
 2. The project's own check command and tests, in a container if a runtime is available.
 3. `semgrep`. If the program is missing, run `scripts/run-tool.sh semgrep <project>` instead. Clean scanner results do not settle access control, so this does not replace step 1.
-4. Dependencies: `npm audit`, `pip-audit` or `scripts/run-tool.sh composer-audit <project>` as they apply; `supply-chain-risk-auditor` for npm, Python and Go.
+4. Dependencies: `npm audit`, `pip-audit` or `scripts/run-tool.sh composer-audit <project>` as they apply; for PHP and Java also `scripts/run-tool.sh trivy <project>` (checks `composer.lock`, `pom.xml` and `gradle.lockfile` against known vulnerabilities); `supply-chain-risk-auditor` for npm, Python and Go.
 5. WordPress only: `scripts/run-tool.sh phpcs <project>`, `scripts/run-tool.sh phpstan <project>`, and Plugin Check and PHPUnit in wp-env through `npx @wordpress/env@12.0.0`.
 6. `owasp-security`.
 7. `differential-review`, if there are uncommitted changes or a branch diff.

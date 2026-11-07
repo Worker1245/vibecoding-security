@@ -89,11 +89,11 @@ In the Copilot test, the skill loaded, the help appeared, the extra rule files w
 
 ## Checking tools in containers
 
-Semgrep, PHPCS with the WordPress standard, PHPStan and Composer audit need no installation. With Docker Desktop or an alternative running, `scripts/run-tool.sh <tool> <project>` starts them in a container:
+Semgrep, PHPCS with the WordPress standard, PHPStan, Composer audit and Trivy (known vulnerabilities in PHP and Java dependencies) need no installation. With Docker Desktop or an alternative running, `scripts/run-tool.sh <tool> <project>` starts them in a container:
 
 - The project is mounted read-only, so the tools cannot change it.
-- PHPCS and PHPStan run without network access. Semgrep fetches its rules with metrics turned off, and Composer audit asks Packagist about package names. Neither sends your code.
-- The first run downloads about 2 GB of images.
+- PHPCS and PHPStan run without network access. Semgrep fetches its rules with metrics turned off, and Composer audit asks Packagist about package names. Trivy downloads only its vulnerability database and keeps it in a Docker volume; it sends no dependency names. None of them sends your code.
+- The first run downloads about 2 GB of images. Trivy adds an image of about 250 MB and keeps its vulnerability database in a Docker volume of about 1.7 GB (measured November 2026); `docker volume rm vibecoding-security-trivy-cache` frees it.
 
 ## Updates
 

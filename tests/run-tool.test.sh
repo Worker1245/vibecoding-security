@@ -49,6 +49,17 @@ reset; run composer-audit "$TMP/project" || fail "composer-audit failed"
 expect_call "composer-audit read-only" ':/src:ro'
 expect_call "composer-audit locked" 'audit .*--locked'
 
+mkdir -p "$TMP/javaproject"
+reset; run trivy "$TMP/javaproject"; [ $? -eq 4 ] || fail "trivy without lock or build file must return 4"
+touch "$TMP/javaproject/pom.xml"
+reset; run trivy "$TMP/javaproject" || fail "trivy failed"
+expect_call "trivy vulnerability scan only" 'fs .*--scanners vuln'
+expect_call "trivy sends no dependency names" '--offline-scan'
+expect_call "trivy reports findings in exit code" '--exit-code 1'
+expect_call "trivy read-only" ':/src:ro'
+expect_call "trivy keeps its database" 'trivy-cache:/root/.cache/trivy'
+reset; run trivy "$TMP/project" || fail "trivy on composer.lock failed"
+
 run nonsense "$TMP/project"; [ $? -eq 2 ] || fail "unknown tool must return 2"
 run semgrep "$TMP/does-not-exist"; [ $? -eq 2 ] || fail "missing folder must return 2"
 DOCKER_DOWN=1 run semgrep "$TMP/project"; [ $? -eq 3 ] || fail "stopped runtime must return 3"

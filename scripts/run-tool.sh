@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Runs a checking tool in a container, so it needs no installation. The project is mounted read-only.
-# Usage: run-tool.sh <semgrep|phpcs|phpstan|composer-audit> <project folder>
+# Usage: run-tool.sh <semgrep|phpcs|phpstan|composer-audit|trivy> <project folder>
 # Exit codes: the tool's own, 2 wrong usage, 3 no container runtime, 4 does not apply to this project.
 set -u
 
@@ -9,13 +9,15 @@ readonly ROOT
 readonly SEMGREP_IMAGE="semgrep/semgrep:1.182.1"
 readonly TOOLS_IMAGE="vibecoding-security-tools:1"
 readonly COMPOSER_IMAGE="composer:2"
+readonly TRIVY_IMAGE="aquasec/trivy:0.76.2"
+readonly TRIVY_CACHE="vibecoding-security-trivy-cache:/root/.cache/trivy"
 readonly RUN_LIMIT_SECONDS=900
 readonly PHPSTAN_LEVEL=5
 
 reject() { echo "rejected: $1" >&2; exit 2; }
 limited() { perl -e 'alarm shift; exec @ARGV' "$RUN_LIMIT_SECONDS" "$@"; }
 
-[ "$#" -eq 2 ] || reject "usage: run-tool.sh <semgrep|phpcs|phpstan|composer-audit> <project folder>"
+[ "$#" -eq 2 ] || reject "usage: run-tool.sh <semgrep|phpcs|phpstan|composer-audit|trivy> <project folder>"
 tool="$1"
 [ -d "$2" ] || reject "no such folder: $2"
 project="$(cd "$2" && pwd)"
@@ -57,6 +59,16 @@ case "$tool" in
       exit 4
     fi
     limited docker run --rm -v "$MOUNT" -w /src "$COMPOSER_IMAGE" audit --locked --no-interaction
+    ;;
+  trivy)
+    # Checks locked PHP and Java dependencies for known vulnerabilities. Downloads only the
+    # vulnerability database (kept in a volume); --offline-scan sends no dependency names.
+    if [ ! -f "$project/composer.lock" ] && ! has_files 'pom.xml' && ! has_files 'gradle.lockfile'; then
+      echo "this project has no composer.lock, pom.xml or gradle.lockfile" >&2
+      exit 4
+    fi
+    limited docker run --rm -v "$MOUNT" -v "$TRIVY_CACHE" -w /src "$TRIVY_IMAGE" \
+      fs --scanners vuln --offline-scan --exit-code 1 --no-progress /src
     ;;
   *)
     reject "unknown tool: $tool"
