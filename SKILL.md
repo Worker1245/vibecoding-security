@@ -60,7 +60,7 @@ If `local/rules.md` exists in this skill's folder, read it too. These are the us
 Ask them before writing code and when checking existing code; report the answer per question, with evidence (measurements, not impressions).
 1. **Does OWASP apply?** Map the real entry points first, then name which categories apply and which do not, and why. Beyond the Security floor, harden only along a real attack path.
 2. **Does YAGNI apply?** Build only what was asked for and is needed now: no speculative options, settings, abstractions or extension points. The Security floor is never extra scope.
-3. **What can be reused instead of created?** Look first for an existing function or module in the project, then the standard library, then an established library. Add a dependency only with a reason.
+3. **What can be reused instead of created?** Look first whether the need can be met without new code (an existing tool, configuration, or processing where the data already lives), then for an existing function or module in the project, then the standard library, then an established library. Add a dependency only with a reason.
 4. **Is everything kept dumb simple (KISS)?** Pick the simplest solution that works; a clever one needs a measured reason. A learning or complicated part is measured against a simple variant without it before it stays.
 5. **Can it be removed without breaking the application?** Parts stay loosely coupled, so a feature, file or dependency can be taken out on its own. What can go without loss is proposed for removal; removing visible behavior needs the user's consent.
 6. **Can an executor subagent help?** Check it for larger work and tell the user the result in one line, including when the answer is no.

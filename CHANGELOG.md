@@ -29,3 +29,4 @@
 2026-11-07: PHP and Java security rules added (references/php.md, references/java.md), based on a sourced research report; WordPress rules build on them
 2026-11-07: Trivy added to the container tools: checks composer.lock, pom.xml and gradle.lockfile for known vulnerabilities
 2026-11-07: rules from an anonymised chat review: lost updates between views, limits on anonymous storage, IPv6 rate limits, mail to unconfirmed addresses, file name normalisation, PHP regex anchors, one test per output, re-asked questions with context, read code before explaining it, scoped tests during work; owasp-security for LLM features
+2026-11-07: question 3 first asks whether the need can be met without new code
