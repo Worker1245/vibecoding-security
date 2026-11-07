@@ -1,6 +1,6 @@
 ---
 name: vibecoding-security
-description: Binding rules for writing, revising, refactoring and reviewing code in any language and project (structure, architecture, tests, readability, error handling, secure coding, OWASP, dependencies, cleanup, performance, executor subagents). Load before every code change.
+description: Binding rules for writing, revising, refactoring and reviewing code in any language and project (structure, architecture, tests, readability, error handling, secure coding, OWASP, PHP and Java security, dependencies, cleanup, performance, executor subagents). Load before every code change.
 ---
 
 # Code rules
@@ -44,6 +44,8 @@ If `local/rules.md` exists in this skill's folder, read it too. These are the us
 | The user asks for security tips or what is set up | `references/setup-check.md` |
 | The user asks to check, review or audit a whole project | `references/project-check.md` |
 | The change adds or alters a route, handler, form, upload, database query, login, permission, file or network access, secret or package, or shows data in a UI, even if the request does not mention security; any security review | `references/security.md` |
+| The change touches PHP code (also WordPress) | `references/php.md` |
+| The change touches Java code (also Kotlin calling Java APIs, Spring, Jakarta EE) | `references/java.md` |
 | The project is a WordPress plugin or theme | `references/wordpress.md` |
 | The change adds a feature or module, moves code between modules, replaces old code or libraries, adds a feature toggle, adds anything that runs unattended, or builds a new version | `references/architecture.md` |
 | The work starts a project, the project has a design folder (read its index first), or it plans a version, briefs an agent or builds a mock-up | `references/project.md` |

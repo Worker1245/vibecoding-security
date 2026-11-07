@@ -11,6 +11,7 @@ An [Agent Skill](https://agentskills.io) with language-agnostic rules for writin
 - Tests, including runs in a container (Docker Desktop or a free alternative) and one check command, and simple design
 - Refactoring, readability and robustness
 - A security floor for every change, secure coding (OWASP, NIST SSDF) and how to judge security findings
+- PHP security (language, standard library, Laravel, Symfony) and Java security (JDK, Spring Boot, Spring Security, Jakarta EE)
 - WordPress plugins and themes
 - Slimming down, speed and data
 - Executor subagents: when one helps, how to brief it, and how to verify its work

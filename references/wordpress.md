@@ -1,6 +1,6 @@
 # WordPress plugins and themes
 
-WordPress applies its plugin guidelines regardless of how the code was produced, so review everything before release.
+WordPress applies its plugin guidelines regardless of how the code was produced, so review everything before release. The rules in `php.md` apply too; where WordPress has its own API, the rule here wins.
 
 ## Access
 - Every state-changing handler (admin-post, AJAX, REST, form) needs both a nonce or authenticated REST request and a capability check; neither replaces the other. `is_admin()` proves nothing. `wp_ajax_` admits any logged-in user.

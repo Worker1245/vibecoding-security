@@ -26,3 +26,4 @@
 2026-11-07: rule added: check every push for personal data, including commit metadata; licence names the GitHub account
 2026-11-07: help names the command lists "claude commands" and "secret claude commands", handed over to the claude-code-help skill
 2026-11-07: command lists end with suggestions that fit the user
+2026-11-07: PHP and Java security rules added (references/php.md, references/java.md), based on a sourced research report; WordPress rules build on them
