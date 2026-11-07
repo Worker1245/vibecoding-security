@@ -1,0 +1,27 @@
+name: Bug report
+description: A script fails, or an agent ignores or misreads a rule
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: "Please do not include personal data, secrets, local paths or code from your own projects. For security problems use Security → Report a vulnerability instead."
+  - type: input
+    id: agent
+    attributes:
+      label: Agent and version
+      placeholder: "Claude Code 2.x, Codex, Copilot CLI, ..."
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you typed, what you expected and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Output
+      description: Error message or script output, with paths and names removed.
+      render: text

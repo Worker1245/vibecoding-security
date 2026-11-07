@@ -1,6 +1,32 @@
 # vibecoding-security
 
-An [Agent Skill](https://agentskills.io) with language-agnostic rules for writing, refactoring and reviewing code. It works with coding agents that read `SKILL.md`, such as [Claude Code](https://claude.com/claude-code), OpenAI Codex and GitHub Copilot. Install shows how far each one has been tested.
+**Security rules for vibe coding.** An [Agent Skill](https://agentskills.io) that makes AI coding agents write safer, tested code, on every change and without being asked.
+
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Agent Skill](https://img.shields.io/badge/Agent%20Skill-SKILL.md-8A2BE2.svg)](SKILL.md)
+![Works with](https://img.shields.io/badge/works%20with-Claude%20Code%20%7C%20Codex%20%7C%20Copilot-555.svg)
+
+## Why
+
+AI agents write working code fast, but not necessarily secure code. In the Veracode 2025 GenAI Code Security Report, generated code introduced an OWASP Top 10 vulnerability in 45 % of test cases across more than 100 models, and larger or newer models did no better ([Veracode, July 2025](https://www.veracode.com/?p=22337)). Reminding the agent in every prompt does not scale. This skill makes the rules binding:
+
+- **Security floor on every change:** access checks, input validation and output encoding for every new route, form, upload and query, even when your prompt does not mention security.
+- **No shortcuts:** no weakened tests, no "for now" security, no features you did not ask for.
+- **Checks without installing anything:** Semgrep, PHPCS, PHPStan, Composer audit and Trivy run in Docker, with your project mounted read-only.
+- **Your rules, on your machine:** it learns from your corrections, adds a rule only after your yes, and never uploads what it learned.
+
+## Quick start
+
+```bash
+git clone https://github.com/Worker1245/vibecoding-security.git
+mkdir -p ~/.claude/skills && ln -s "$PWD/vibecoding-security" ~/.claude/skills/vibecoding-security
+```
+
+Then type `/vibecoding-security` in Claude Code for a short help, or just start coding: the agent loads the skill before code changes. Other agents: see [Install](#install).
+
+## Overview
+
+It has language-agnostic rules for writing, refactoring and reviewing code, plus rules for PHP, Java and WordPress. It works with coding agents that read `SKILL.md`, such as [Claude Code](https://claude.com/claude-code), OpenAI Codex and GitHub Copilot. Install shows how far each one has been tested.
 
 ## What it covers
 

@@ -1,0 +1,31 @@
+name: Rule proposal
+description: Propose a new rule or a change to an existing one
+labels: ["rule proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: "Please do not include personal data, secrets, local paths or code from your own projects. Use a minimal, made-up example."
+  - type: textarea
+    id: rule
+    attributes:
+      label: Rule
+      description: The rule in one English sentence.
+    validations:
+      required: true
+  - type: input
+    id: target
+    attributes:
+      label: Target file
+      placeholder: "SKILL.md, references/security.md, references/php.md, ..."
+  - type: textarea
+    id: mistake
+    attributes:
+      label: Mistake it prevents
+      description: What an agent did wrong, as a minimal, made-up example.
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source
+      description: Official documentation or OWASP page, for security facts.
