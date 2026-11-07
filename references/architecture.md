@@ -6,6 +6,7 @@
 - Top-level folders name what the application does, not the framework, where the framework allows it.
 - Start with presentation, domain logic and data access separated; split larger systems by domain first, then by layer.
 - For each application, check whether the four Clean Architecture layers (entities, use cases, interface adapters, frameworks and drivers) are worth their cost, and state the result in one line. Use them only if size and expected change justify it; the dependency rule above applies regardless.
+- When several views, tabs or clients edit the same server data, a save must not overwrite changes it has not seen: send only the changed fields or reject stale writes with a version check (optimistic concurrency), and reload the other views after a write. Test it with two views open at once.
 - Whatever runs unattended is bounded by construction (memory, stored data, anything it learns). The limits themselves are tested and measured in a long run.
 
 ## Refactoring and modernization

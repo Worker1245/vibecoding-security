@@ -7,6 +7,10 @@
 - Prevent injection: parameterized queries / prepared statements instead of building commands from input; no shell commands built from input.
 - Prevent XSS: context-appropriate output encoding (e.g. `<` becomes `&lt;`), no `innerHTML` with untrusted data, links only with allowed schemes.
 - Prevent path traversal and unsafe deserialization with safe standard libraries, not home-grown solutions.
+- Anything anonymous users can fill (uploads, temporary storage, queues, outgoing mail) has a per-client and a global limit, reserved and checked on every write or chunk, not only the first.
+- Rate limits count IPv6 clients per /64 prefix and use atomic counters; where that is not possible, name the gap.
+- Mail to an address nobody has confirmed carries no content or attachments the sender controls: confirm the address first, or send a fixed text.
+- Check file names only after normalizing them (trim spaces and trailing dots, lowercase) and judge every extension, not only the last; store files under a generated name.
 - No secrets in code or the repository; use environment variables or a secure store.
 - Store passwords only salted and hashed with strong algorithms (Argon2id, bcrypt); encrypt data in transit end to end (TLS); compare secrets in constant time.
 - Memory safety: in C/C++ avoid unsafe functions (e.g. `strcpy`, `gets`); prefer memory-safe languages (e.g. Rust) where possible.
@@ -21,7 +25,7 @@
 
 ## Tools
 Use these skills where installed; otherwise continue with the rules above:
-- `owasp-security`: secure implementation and focused security review.
+- `owasp-security`: secure implementation and focused security review. Load it whenever the product itself uses an LLM or agent (prompt injection through uploaded or fetched content, cost limits, AI output only as a proposal a person checks).
 - `semgrep`: static pattern scan, including PHP and WordPress code.
 - `differential-review`: security review of a diff or pull request.
 - `variant-analysis`: after a bug is found, search for the same root cause elsewhere.

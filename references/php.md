@@ -11,6 +11,7 @@ These rules add to `security.md` and also hold for WordPress; where WordPress ha
 - SQL: bind every value (PDO prepared statements, Doctrine `setParameter()`, Laravel bindings such as `whereRaw('email = ?', [$email])`). Identifiers (columns, `ORDER BY`, table names) come only from a hard-coded allowlist, e.g. validated with `in:price,updated_at`; hard-code the column in Laravel `Rule::unique(...)->ignore($id, 'id')`.
 - PDO: set `PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION` and `PDO::ATTR_EMULATE_PREPARES => false`. PDO_MYSQL emulates prepares by default, and `false` only requests native prepares; binding stays the actual protection.
 - No shell: start programs with `proc_open([...])` or Symfony `new Process([...])` with an absolute program path. Put `--` before user values and validate their format, because an array still allows a value starting with `-` to act as an option. `escapeshellcmd()` is no protection. With `Process::fromShellCommandline()` pass data only through environment variables and `"${:NAME}"`.
+- Anchor allowlist regexes with `\A…\z` (or the `D` modifier): `$` also matches before a trailing newline.
 - No `eval()`, `extract()`, dynamic `include`/`require`, variable functions or classes, or `call_user_func()` with names from input; map input to code with `match` over an allowlist.
 
 ## Deserialization and comparison

@@ -26,7 +26,8 @@ These rules apply to every language and project and to any coding agent that can
 **Command lists:** If the text after the call is `claude commands` or `secret claude commands`, load the `claude-code-help` skill and follow its command lists. If that skill is not available, say that these lists need Claude Code with that skill installed. This is not a code task: skip the help, the prompt creator, the update check and the six questions.
 
 ## Working with the user
-- When something is unclear, ask. Number questions consecutively across replies, explain the situation, and give 3–5 options a), b), c) with the consequence of each; put ★ in front of the recommended one, so a short answer like "1a 2b" is enough. After an answer, name only the open questions.
+- When something is unclear, ask. Number questions consecutively across replies, explain the situation, and give 3–5 options a), b), c) with the consequence of each; put ★ in front of the recommended one, so a short answer like "1a 2b" is enough. After an answer, name only the open questions, each again with its situation and options, never just its number.
+- Before explaining how code behaves, read that code; do not answer from memory.
 - Compare each instruction with the context: check what the user may have forgotten (follow-up changes, related files, open points) and ask whether to do that too. Do none of it unasked.
 - Do not add functions the user did not ask for. Present what you derive from the request as a question first: is it needed? Security requirements are not such functions (see Security floor).
 - Run commands that can hang with a time limit per file. Skip and report a file that exceeds it, and check that none of your processes keep running.
@@ -43,7 +44,7 @@ If `local/rules.md` exists in this skill's folder, read it too. These are the us
 | The user invokes this skill directly with their own prompt for a task | `references/prompt-creator.md` |
 | The user asks for security tips or what is set up | `references/setup-check.md` |
 | The user asks to check, review or audit a whole project | `references/project-check.md` |
-| The change adds or alters a route, handler, form, upload, database query, login, permission, file or network access, secret or package, or shows data in a UI, even if the request does not mention security; any security review | `references/security.md` |
+| The change adds or alters a route, handler, form, upload, database query, login, permission, file or network access, secret, package or LLM/agent feature, or shows data in a UI, even if the request does not mention security; any security review | `references/security.md` |
 | The change touches PHP code (also WordPress) | `references/php.md` |
 | The change touches Java code (also Kotlin calling Java APIs, Spring, Jakarta EE) | `references/java.md` |
 | The project is a WordPress plugin or theme | `references/wordpress.md` |
@@ -75,7 +76,8 @@ Ask them before writing code and when checking existing code; report the answer 
 
 ## Tests
 - Verify your own changes before the user sees them. Every project has a test path (container, headless browser, unit tests) as a fixed part of the cycle; if it is missing, set it up or propose it first.
-- Every behavior change arrives with a test that fails without it. Prefer red/green: write the test, watch it fail, then implement. Work in small steps and run the tests after every edit, so that after each step it is provable that behavior did not change.
+- Every behavior change arrives with a test that fails without it. Prefer red/green: write the test, watch it fail, then implement. Work in small steps and run the tests of the changed area after every edit, so that after each step it is provable that behavior did not change; run the full check command once before handover.
+- A rule that applies to several outputs (file formats, views, endpoints) gets a test for each of them.
 - Never wave away a failing test, not even an intermittent one: find the cause. A test depends neither on what earlier tests left behind nor on unseeded randomness.
 - Do not edit, delete or skip tests, or special-case test inputs, to get green. If a test conflicts with the spec, stop and flag it.
 - Prove a pure restructuring: compare a checksum of the output before and after; it must be identical.
