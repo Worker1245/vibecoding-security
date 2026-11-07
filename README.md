@@ -28,7 +28,7 @@ The agent loads the skill on its own before code changes. You can also call it y
 - **`/vibecoding-security check my project`** runs all checks one after the other: the rules, the project's tests in a container, the scanners and the security skills. The agent shows the plan and starts right away; it asks first only for anything costly, anything that sends data out, and anything it would install. It changes no code and reports what ran, what could not run and what it found.
 - **`/vibecoding-security` followed by your own prompt** first sharpens the prompt with you: the agent asks what you want to achieve, shows a refined prompt, suggests useful details and asks for the format of the result. Once you are satisfied, it does the work under these rules. Add "directly" to skip the questions.
 - **`/vibecoding-security is there an update?`** looks for a newer version on GitHub.
-- **`/vibecoding-security claude commands`** lists every built-in Claude Code command with a short explanation, and **`/vibecoding-security secret claude commands`** lists popular community skill commands (they work only once installed). Both need Claude Code with the `claude-code-help` skill; other agents say so instead.
+- **`/vibecoding-security claude commands`** lists every built-in Claude Code command with a short explanation, and **`/vibecoding-security secret claude commands`** lists popular community skill commands (they work only once installed). Both end with up to five commands that fit you, each with a reason. Both need Claude Code with the `claude-code-help` skill; other agents say so instead.
 
 The skill answers in the language you write in.
 

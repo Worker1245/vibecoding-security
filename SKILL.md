@@ -20,7 +20,7 @@ These rules apply to every language and project and to any coding agent that can
   - `/vibecoding-security check my project` runs all the checks: the rules, the security skills, the tests in Docker and every security check in this skill.
   - `/vibecoding-security` followed by your own prompt: the agent first sharpens the prompt with you through questions, then does the work under these rules once you are satisfied. Add "directly" to skip the questions.
   - `/vibecoding-security is there an update?` looks for a newer version on GitHub and installs it only if the user agrees, keeping the user's own changes.
-  - Claude Code only, with the `claude-code-help` skill installed: `/vibecoding-security claude commands` lists every built-in command with a short explanation; `/vibecoding-security secret claude commands` lists popular community skill commands, which work only once installed.
+  - Claude Code only, with the `claude-code-help` skill installed: `/vibecoding-security claude commands` lists every built-in command with a short explanation; `/vibecoding-security secret claude commands` lists popular community skill commands, which work only once installed. Both end with up to five commands that fit the user.
 - End by asking what to work on. If the agent loads this skill on its own before a code change, skip the help and continue with the task.
 
 **Command lists:** If the text after the call is `claude commands` or `secret claude commands`, load the `claude-code-help` skill and follow its command lists. If that skill is not available, say that these lists need Claude Code with that skill installed. This is not a code task: skip the help, the prompt creator, the update check and the six questions.
