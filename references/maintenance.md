@@ -10,6 +10,7 @@ Keep this skill current, but the user decides every change.
 - Add the rule in English to `local/rules.md`, worded generally and briefly. Do not duplicate an existing rule; if it contradicts one, replace the old rule and say so.
 - Add a rule to the published files only if the user explicitly says so. Then it goes to the fitting section of the fitting file: `SKILL.md` for what applies to every change, `references/` for everything else.
 - For a change to the published files, append one line to `CHANGELOG.md`: `YYYY-MM-DD: <what changed>`, and commit it locally in this folder's git repository (`git add SKILL.md references CHANGELOG.md`, message `Rule: <short summary>`). Never `git push` unless the user explicitly says so in the chat.
+- Before any `git push`, check what would be published: `git ls-files`, `git grep` and `git log --format='%an %ae %cn %ce' @{upstream}..HEAD`. Nothing personal may go out: no `local/` or `versions/`, profiles, learning data, chat or search histories, local paths, or email addresses other than GitHub noreply addresses, also in commit metadata. If anything is found, do not push; tell the user what and where.
 - Then tell the user in one or two sentences that the change is in, and that the previous version is in `versions/` (or `git revert`).
 - Leave the frontmatter (`name`, `description`) unchanged unless the user asks.
 
